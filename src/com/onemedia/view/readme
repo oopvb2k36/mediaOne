@@ -1,0 +1,22 @@
+Đây là package tạo lớp xuất nhập
+
+ví dụ tạo lớp xuất nhập:
+
+// Tạo lớp xuất nhập quản lý nhân viên
+
+package com.onemedia.view;
+import com.onemedia.control.*;
+
+public class StaffProcess {
+    public StaffProcess(StoreManagement storeManagement) {
+        this.storeManagement = storeManagement;
+    }
+
+    /*
+    Viết các phương thức thực hiện xuất nhập ở đây...
+    Nếu cần sử dụng chức năng của các lớp quản lý khác thì truy nhập vào
+    storeManagement
+    */
+
+    private StoreManagement storeManagement;
+}
