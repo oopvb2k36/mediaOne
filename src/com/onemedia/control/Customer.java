@@ -1,26 +1,38 @@
 package com.onemedia.control;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
 public class Customer {
 
-    @Override
-    public boolean equals(Object obj) {
-        return tag.equals(((Customer)(obj)).getTag());
+    public Customer() {
+        idCode = "-1";
+        name = "NO NAME";
+        address = "NO ADDRESS";
+        discount = 0;
     }
 
-    @Override
-    public int hashCode() {
-        return tag.hashCode();
+    public Customer(String idCode, String name) {
+        setIdCode(idCode);
+        setName(name);
+        address = "NO ADDRESS";
+        discount = 0;
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public Customer(Customer customer) {
+        setIdCode(customer.getIdCode());
+        setName(customer.getName());
+        setAddress(customer.getAddress());
+        setDiscount(customer.getDiscount());
     }
 
-    public Tag getTag() {
-        return tag;
+    public void printInfo() {
+        // TODO: bổ sung in thông tin ra màn hình
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
+    }
+
+    public String getIdCode() {
+        return idCode;
     }
 
     public void setName(String name) {
@@ -40,7 +52,7 @@ public class Customer {
     }
 
     public void setDiscount(double discount) {
-        if (discount < 0 ) this.discount = discount;
+        if (discount < 0 ) this.discount = 0.0d;
         else this.discount = discount;
     }
 
@@ -48,7 +60,7 @@ public class Customer {
         return discount;
     }
 
-    private Tag tag;
+    private String idCode;
     private String name;
     private String address;
     private double discount;

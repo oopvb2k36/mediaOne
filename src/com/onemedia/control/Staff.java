@@ -1,35 +1,45 @@
 package com.onemedia.control;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
+import java.time.LocalDate;
+
 public class Staff {
 
-    public Staff(Tag tag, String name) {
-        setTag(tag);
+    public Staff() {
+        idCode = "-1";
+        name = "NO NAME";
+        address = "NO ADDRESS";
+        salary = 0.0;
+    }
+
+    public Staff(String idCode, String name) {
+        setIdCode(idCode);
         setName(name);
-        pass = null;
-        groups = 0;
-        status = StaffStatus.DISABLED;
-        salary = 0.0d;
+        address = "NO ADDRESS";
+        salary = 0.0;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return tag.equals(((Staff)(obj)).getTag());
+    public Staff(Staff staff) {
+        setIdCode(staff.getIdCode());
+        setName(staff.getName());
+        setAddress(staff.getAddress());
+        setSalary(staff.getSalary());
     }
 
-    @Override
-    public int hashCode() {
-        return tag.hashCode();
+    public double getPaid() {
+        // TODO: Bổ sung tính lương
+        return 0;
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public void printInfo() {
+        // TODO: Bổ sung in thông tin ra màn hình
     }
 
-    public Tag getTag() {
-        return tag;
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
+    }
+
+    public String getIdCode() {
+        return idCode;
     }
 
     public void setName(String name) {
@@ -40,42 +50,34 @@ public class Staff {
         return name;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getPass() {
-        return pass;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setGroups(int groups) {
-        this.groups = groups;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public int getGroups() {
-        return groups;
-    }
-
-    public void setStatus(StaffStatus status) {
-        this.status = status;
-    }
-
-    public StaffStatus getStatus() {
-        return status;
+    public String getAddress() {
+        return address;
     }
 
     public void setSalary(double salary) {
-        this.salary = salary;
+        if (salary < 0) this.salary = 0.0;
+        else this.salary = salary;
     }
 
     public double getSalary() {
         return salary;
     }
 
-    private Tag tag;
+    private String idCode;
     private String name;
-    private String pass;
-    private int groups;
-    private StaffStatus status;
+    private LocalDate dateOfBirth;
+    private String address;
     private double salary;
 }

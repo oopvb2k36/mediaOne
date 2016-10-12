@@ -1,15 +1,33 @@
 package com.onemedia.control;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
 public class Music extends Product {
 
-    public Music(Tag tag, String name) {
-        super(tag, name);
-        type = ProductType.MUSIC;
+    public Music() {
+        super();
+        artist = "";
+        genre = "";
+        issuedDate = null;
+    }
+
+    public Music(String idCode, String name) {
+        super(idCode, name);
+        artist = "";
+        genre = "";
+        issuedDate = null;
+    }
+
+    public Music(Music music) {
+        super(music);
+        setArtist(music.getArtist());
+        setGenre(music.getGenre());
+        setIssuedDate(music.getIssuedDate());
+    }
+
+    @Override
+    public void printInfo() {
+        // TODO: Bổ sung in thông tin ra màn hình
     }
 
     public void setArtist(String artist) {
@@ -28,15 +46,15 @@ public class Music extends Product {
         return genre;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setIssuedDate(LocalDate issuedDate) {
+        this.issuedDate = issuedDate;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public LocalDate getIssuedDate() {
+        return issuedDate;
     }
 
     private String artist;
     private String genre;
-    private Date timestamp;
+    private LocalDate issuedDate;
 }

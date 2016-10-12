@@ -1,58 +1,81 @@
 package com.onemedia.control;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
 public class ImportTag {
 
-    public ImportTag(Tag tag) {
-        setTag(tag);
-        proList = new ArrayList<Product>();
+    public ImportTag(String idCode) {
+        setIdCode(idCode);
+        timeStamp = new Date().getTime();
+        provider = null;
+        note = "NO NOTES";
+        products = new ArrayList<>();
+    }
+
+    public double getMoneyTotal() {
+        // TODO: Bổ sung tính tổng tiền phiếu
+
+        /*
+        Dựa vào đơn giá mua và số lượng để tính
+         */
+        return 0;
     }
 
     public boolean addProduct(Product product) {
-        if (proList.contains(product)) return false;
+        // TODO: Bổ sung thêm sản phẩm
 
-        proList.add(product);
+        /*
+        Kiểm tra idCode của product này đã có trong products chưa?
+        Nếu chưa có thì thêm mới
+         */
         return true;
     }
 
-    public boolean removeProduct(Product product) {
-        return proList.remove(product);
+    public boolean rmvProduct(String idCode) {
+        // TODO: Bổ sung xóa sản phẩm
+
+        /*
+        Dựa vào idCode để tìm trong products
+         */
+        return true;
     }
 
-    public double sumMoney() {
-        double sum = 0.0d;
-        for (Product p :  proList) {
-            sum += p.getCostPrice() * p.getQuantity();
-        }
-        return sum;
+    public void printInfo() {
+        // TODO: bổ sung in thông tin ra màn hình
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return tag.equals(((ImportTag)(obj)).getTag());
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
     }
 
-    @Override
-    public int hashCode() {
-        return tag.hashCode();
+    public String getIdCode() {
+        return idCode;
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public long getTimeStamp() {
+        return timeStamp;
     }
 
-    public Tag getTag() {
-        return tag;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public Product[] getProList() {
-        return (Product[]) proList.toArray();
+    public String getNote() {
+        return note;
     }
 
-    private Tag tag;
-    private ArrayList<Product> proList;
+    public void setProvider(Provider provider) {
+        this.provider = new Provider(provider);
+    }
+
+    public Provider getProvider() {
+        return new Provider(provider);
+    }
+
+    private String idCode;
+    private long timeStamp;
+    private String note;
+    private Provider provider;
+    private ArrayList<Product> products;
 }

@@ -1,31 +1,35 @@
 package com.onemedia.control;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
 public class Provider {
 
-    public Provider(Tag tag, String name) {
-        setTag(tag);
+    public Provider() {
+        idCode = "-1";
+        name = "NO NAME";
+        address = "NO ADDRESS";
+    }
+
+    public Provider(String idCode, String name) {
+        setIdCode(idCode);
         setName(name);
+        address = "NO ADDRESS";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return tag.equals(((Provider)(obj)).getTag());
+    public Provider(Provider provider) {
+        setIdCode(provider.getIdCode());
+        setName(provider.getName());
+        setAddress(provider.getAddress());
     }
 
-    @Override
-    public int hashCode() {
-        return tag.hashCode();
+    public void printInfo() {
+        // TODO: Bổ sung in thông tin ra màn hình
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
     }
 
-    public Tag getTag() {
-        return tag;
+    public String getIdCode() {
+        return idCode;
     }
 
     public void setName(String name) {
@@ -40,7 +44,11 @@ public class Provider {
         this.address = address;
     }
 
-    private Tag tag;
+    public String getAddress() {
+        return address;
+    }
+
+    private String idCode;
     private String name;
     private String address;
 }

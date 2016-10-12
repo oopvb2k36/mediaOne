@@ -1,15 +1,28 @@
 package com.onemedia.control;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
 public class Book extends Product {
 
-    public Book(Tag tag, String name) {
-        super(tag, name);
-        type = ProductType.BOOK;
+    public Book() {
+        super();
+    }
+
+    public Book(String idCode, String name) {
+        super(idCode, name);
+    }
+
+    public Book(Book book) {
+        super(book);
+        setAuthor(book.getAuthor());
+        setGenre(book.getGenre());
+        setPublisher(book.getPublisher());
+        setIssuedDate(book.getIssuedDate());
+    }
+
+    @Override
+    public void printInfo() {
+        // TODO: Bổ sung in thông tin ra màn hình
     }
 
     public void setAuthor(String author) {
@@ -36,16 +49,16 @@ public class Book extends Product {
         return publisher;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setIssuedDate(LocalDate issuedDate) {
+        this.issuedDate = issuedDate;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public LocalDate getIssuedDate() {
+        return issuedDate;
     }
 
     private String author;
     private String genre;
     private String publisher;
-    private Date timestamp;
+    private LocalDate issuedDate;
 }

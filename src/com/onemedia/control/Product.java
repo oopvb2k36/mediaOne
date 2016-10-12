@@ -1,36 +1,52 @@
 package com.onemedia.control;
 
-/**
- * Created by PhamHai on 9/20/2016.
- */
 public abstract class Product {
 
-    public Product(Tag tag, String name) {
-        this.type = ProductType.UNKNOWN;
-        setTag(tag);
+    public Product() {
+        idCode = "-1";
+        name = "NO NAME";
+        quantity = 0;
+        costUnitPrice = 0;
+        sellUnitPrice = 0;
+    }
+
+    public Product(String idCode, String name) {
+        setIdCode(idCode);
         setName(name);
-        setQuantity(0);
-        setCostPrice(0.0d);
-        setSellPrice(0.0d);
-        setDiscount(0.0d);
+        quantity = 0;
+        costUnitPrice = 0;
+        sellUnitPrice = 0;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return tag.equals(((Product)obj).getTag());
+    public Product(Product product) {
+        setIdCode(product.getIdCode());
+        setName(product.getName());
+        setQuantity(product.getQuantity());
+        setCostUnitPrice(product.getCostUnitPrice());
+        setSellUnitPrice(product.getSellUnitPrice());
+        setDiscount(product.getDiscount());
     }
 
-    @Override
-    public int hashCode() {
-        return tag.hashCode();
+    public double getSellPrice() {
+        // TODO: bổ sung tính giá bán
+        return 0;
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public double getCostPrice() {
+        // TODO: bổ sung tính giá mua
+        return 0;
     }
 
-    public Tag getTag() {
-        return tag;
+    public void printInfo() {
+        // TODO: bổ sung in thông tin ra màn hình
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
+    }
+
+    public String getIdCode() {
+        return idCode;
     }
 
     public void setName(String name) {
@@ -50,22 +66,22 @@ public abstract class Product {
         return quantity;
     }
 
-    public void setCostPrice(double costPrice) {
-        if (costPrice < 0) this.costPrice = 0;
-        else this.costPrice = costPrice;
+    public void setCostUnitPrice(double costUnitPrice) {
+        if (costUnitPrice < 0) this.costUnitPrice = 0;
+        else this.costUnitPrice = costUnitPrice;
     }
 
-    public double getCostPrice() {
-        return costPrice;
+    public double getCostUnitPrice() {
+        return costUnitPrice;
     }
 
-    public void setSellPrice(double sellPrice) {
-        if (sellPrice < 0) this.sellPrice = 0;
-        else this.sellPrice = sellPrice;
+    public void setSellUnitPrice(double sellUnitPrice) {
+        if (sellUnitPrice < 0) this.sellUnitPrice = 0;
+        else this.sellUnitPrice = sellUnitPrice;
     }
 
-    public double getSellPrice() {
-        return sellPrice;
+    public double getSellUnitPrice() {
+        return sellUnitPrice;
     }
 
     public void setDiscount(double discount) {
@@ -77,24 +93,10 @@ public abstract class Product {
         return discount;
     }
 
-    public ProductType getType() {
-        return type;
-    }
-
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-
-    public Provider getProvider() {
-        return provider;
-    }
-
-    protected Tag tag;
-    protected String name;
-    protected int quantity;
-    protected double costPrice;
-    protected double sellPrice;
-    protected double discount;
-    protected ProductType type;
-    protected Provider provider;
+    private String idCode;
+    private String name;
+    private int quantity;
+    private double costUnitPrice;
+    private double sellUnitPrice;
+    private double discount;
 }

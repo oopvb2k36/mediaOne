@@ -1,31 +1,22 @@
 package com.onemedia.control;
 
-/**
- * Created by PhamHai on 9/21/2016.
- */
-public class Store implements ISystemManagement, IStaffManagement {
+public class Store {
 
-    public Store(Tag tag, String name) {
-        setTag(tag);
+    public Store(String name) {
         setName(name);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return tag.equals(((Store)(obj)).getTag());
+    public Store(Store store) {
+        setName(store.getName());
+        setAddress(store.getAddress());
+        setDirector(store.getDirector());
+        setPhone(store.getPhone());
+        setTaxCode(store.getTaxCode());
+        setWebsite(store.getWebsite());
     }
 
-    @Override
-    public int hashCode() {
-        return tag.hashCode();
-    }
-
-    public void setTag(Tag tag) {
-        this.tag = tag;
-    }
-
-    public Tag getTag() {
-        return tag;
+    public void printInfo() {
+        // TODO: bổ sung in thông tin ra màn hình
     }
 
     public void setName(String name) {
@@ -76,41 +67,11 @@ public class Store implements ISystemManagement, IStaffManagement {
         return taxCode;
     }
 
-    public Staff getLoggedStaff() {
-        return loggedStaff;
-    }
-
-    private Tag tag;
     private String name;
     private String director;
     private String phone;
     private String website;
     private String address;
     private String taxCode;
-    private Staff loggedStaff;
 
-    @Override
-    public Staff logIn(String code, String pass) {
-        return null;
-    }
-
-    @Override
-    public Staff logOut() {
-        return null;
-    }
-
-    @Override
-    public boolean saveStaffInfo(Staff staff) {
-        return false;
-    }
-
-    @Override
-    public Staff[] getStaffList() {
-        return new Staff[0];
-    }
-
-    @Override
-    public Staff getStaffByTagCode(String tagCode) {
-        return null;
-    }
 }
