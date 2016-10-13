@@ -9,37 +9,49 @@ public class CustomerManagement {
     }
 
     public boolean addCustomer(Customer customer) {
-        // TODO: bổ sung thêm khách hàng
-
-        /*
-        Kiểm tra xem đã tồn tại mã khách hàng chưa
-        Nếu chưa thì thêm mới
-         */
+        if (customer == null) return false;
+        for (int i=0; i < customers.size(); i++) {
+            Customer o = customers.get(i);
+            if (o.getIdCode().equals(customer.getIdCode()))
+                return false;
+        }
+        customers.add(customer);
         return true;
     }
 
     public Customer rmvCustomer(String idCode) {
-        // TODO: bổ sung xóa khách hàng
-
-        /*
-        Kiểm tra mã khách hàng, nếu có thì xóa
-        return khách hàng bị xóa
-         */
+        for (int i=0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
+            if (customer.getIdCode().equals(idCode)) {
+                customers.remove(i);
+                return customer;
+            }
+        }
         return null;
     }
 
     public boolean customerExisted(String idCode) {
-        // TODO: bổ sung kiểm tra mã khách hàng
-        return true;
+        for (int i=0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
+            if (customer.getIdCode().equals(idCode))
+                return true;
+        }
+        return false;
     }
 
     public Customer getCustomerById(String idCode) {
-        // TODO: bổ sung tìm kiếm khách hàng
+        for (int i=0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
+            if (customer.getIdCode().equals(idCode))
+                return customer;
+        }
         return null;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in danh sách khách hàng
+        for (Customer o : customers) {
+            o.printInfo();
+        }
     }
 
     private ArrayList<Customer> customers;
