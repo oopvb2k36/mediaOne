@@ -15,37 +15,62 @@ public class StoreManagement {
 
     }
 
-    public Staff logIn(String user, String pass) {
-        // TODO: bổ sung đăng nhập hệ thống
-
-        /*
-        return nhân viên đã đăng nhập thành công, null nếu thất bại
-         */
+    public Staff logIn(String idCode, String user, String pass) {
+        Staff staff = staffManagement.getStaffById(idCode);
+        if (staff != null) {
+            if (staff instanceof Director) {
+                Director director = (Director)staff;
+                if (director.getUser().equals(user) &&
+                        director.getPass().equals(pass)) {
+                    loggedStaff = director;
+                    return director;
+                }
+            }
+            else if (staff instanceof Manager) {
+                Manager manager = (Manager)staff;
+                if (manager.getUser().equals(user) &&
+                        manager.getPass().equals(pass)) {
+                    loggedStaff = manager;
+                    return manager;
+                }
+            }
+            else if (staff instanceof Cashier) {
+                Cashier cashier = (Cashier) staff;
+                if (cashier.getUser().equals(user) &&
+                        cashier.getPass().equals(pass)) {
+                    loggedStaff = cashier;
+                    return cashier;
+                }
+            }
+        }
         return null;
     }
 
     public Staff logOut() {
-        // TODO: bổ sung đăng xuất hệ thống
-
-        /*
-        return nhân viên đã đăng xuất, null nếu chưa đăng nhập
-         */
+        loggedStaff = null;
         return null;
     }
 
     public void printFinancialInfo() {
-        // TODO: bổ sung in thông tin tài chính
-
-        /*
-        Thông tin ở đây đơn giản bao gồm:
-        - Tổng thu
-        - Tổng chi (sản phẩm)
-        - Tổng chi ngoài (lương, tiền điện, nước...)
-         */
+        double exSum = exportManagement.getMoneyTotal();
+        double imSum = importManagement.getMoneyTotal();
+        double expenseSum = expenseManagement.getMoneyTotal();
+        double revenue = exSum - imSum - expenseSum;
+        System.out.println("Tong thu: " + exSum);
+        System.out.println("Tong chi: " + imSum);
+        System.out.println("Chi phi ngoai: " + expenseSum);
+        System.out.println("Loi nhuan: " + revenue);
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin cửa hàng
+        System.out.println("Nhan vien dang nhap:");
+        loggedStaff.printInfo();
+        System.out.println("Thong tin cua hang:");
+        store.printInfo();
+    }
+
+    public Staff getLoggedStaff() {
+        return new Staff(loggedStaff);
     }
 
     public void setStore(Store store) {
@@ -61,10 +86,7 @@ public class StoreManagement {
     }
 
     public StaffManagement getStaffManagement() {
-        if (loggedStaff instanceof Director) {
-            return staffManagement;
-        }
-        else return null;
+        return staffManagement;
     }
 
     public CustomerManagement getCustomerManagement() {

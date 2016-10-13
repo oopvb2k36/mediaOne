@@ -24,7 +24,10 @@ public class Customer {
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin ra màn hình
+        System.out.println("Ma KH: " + idCode);
+        System.out.println("Ten: " + name);
+        System.out.println("Dia chi: " + address);
+        System.out.println("Chiet khau: " + discount);
     }
 
     public void setIdCode(String idCode) {
