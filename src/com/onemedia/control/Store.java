@@ -16,7 +16,12 @@ public class Store {
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin ra màn hình
+        System.out.print("Ten:" + name);
+        System.out.print(", Dia chi:" + address);
+        System.out.print(", Giam doc:" + director);
+        System.out.print(", Dien thoai:" + phone);
+        System.out.print(", Website:" + website);
+        System.out.println(", MST:" + taxCode);
     }
 
     public void setName(String name) {

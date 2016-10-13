@@ -31,5 +31,10 @@ public class ImportManagement {
         // TODO: bổ sung in danh sách phiếu nhập
     }
 
+    public double getMoneyTotal() {
+        // TODO: bổ sung tính tổng tiền
+        return 0;
+    }
+
     private ArrayList<ImportTag> importTags;
 }
