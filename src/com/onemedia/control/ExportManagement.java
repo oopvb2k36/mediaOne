@@ -9,26 +9,46 @@ public class ExportManagement {
     }
 
     public boolean addTag(ExportTag exportTag) {
-        // TODO: bổ sung thêm phiếu xuất hàng
+        if (exportTag == null) return false;
+        for (ExportTag o : exportTags) {
+            if (o.getIdCode().equals(exportTag.getIdCode()))
+                return false;
+        }
+        exportTags.add(exportTag);
         return true;
     }
 
     public ExportTag rmvTag(String idCode) {
-        // TODO: bổ sung xóa phiếu xuất
-
-        /*
-        return phiếu xuất bị xóa
-         */
+        for (int i=0; i < exportTags.size(); i++) {
+            ExportTag exportTag = exportTags.get(i);
+            if (exportTag.getIdCode().equals(idCode)) {
+                exportTags.remove(i);
+                return exportTag;
+            }
+        }
         return null;
     }
 
     public boolean tagExisted(String idCode) {
-        // TODO: bổ sung kiểm tra phiếu xuất
-        return true;
+        for (ExportTag exportTag : exportTags) {
+            if (exportTag.getIdCode().equals(idCode))
+                return true;
+        }
+        return false;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in danh sách phiếu xuất
+        for (ExportTag exportTag : exportTags) {
+            exportTag.printInfo();
+        }
+    }
+
+    public double getMoneyTotal() {
+        double sum = 0;
+        for (ExportTag exportTag : exportTags) {
+            sum += exportTag.getMoneyTotal();
+        }
+        return sum;
     }
 
     private ArrayList<ExportTag> exportTags;
