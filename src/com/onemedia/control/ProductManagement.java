@@ -10,6 +10,11 @@ public class ProductManagement {
 
     public boolean addProduct(Product product) {
         // TODO: bổ sung thêm sản phẩm
+        if (product == null) return false;
+        for (int i=0; i < product.size(); i++) {
+            product o = product.get(i);
+            if (product.getIdCode().equals(product.getIdCode()))
+                return false;
         return true;
     }
 
