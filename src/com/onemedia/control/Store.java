@@ -16,12 +16,9 @@ public class Store {
     }
 
     public void printInfo() {
-        System.out.print("Ten:" + name);
-        System.out.print(", Dia chi:" + address);
-        System.out.print(", Giam doc:" + director);
-        System.out.print(", Dien thoai:" + phone);
-        System.out.print(", Website:" + website);
-        System.out.println(", MST:" + taxCode);
+        System.out.format("Ten: %s, Dia chi: %s, Giam doc: %s, Dien thoai: %s," +
+                " Website: %s, MST: %s",
+                name, address, director, phone, website, taxCode);
     }
 
     public void setName(String name) {

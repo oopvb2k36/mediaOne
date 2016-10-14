@@ -24,10 +24,8 @@ public class Customer {
     }
 
     public void printInfo() {
-        System.out.println("Ma KH: " + idCode);
-        System.out.println("Ten: " + name);
-        System.out.println("Dia chi: " + address);
-        System.out.println("Chiet khau: " + discount);
+        System.out.format("Ma KH: %s, Ten: %s, Dia chi: %s, Chiet khau: %s\n",
+                idCode, name, address, discount);
     }
 
     public void setIdCode(String idCode) {

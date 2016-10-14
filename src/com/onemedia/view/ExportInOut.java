@@ -1,10 +1,8 @@
 package com.onemedia.view;
 
 import com.onemedia.control.*;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ExportInOut {
@@ -22,7 +20,7 @@ public class ExportInOut {
             System.out.println("4.Thoat");
             try {
                 System.out.print("Lua chon:");
-                int key = sc.nextInt();
+                int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
                     case 1:
                         storeManagement.getExportManagement().printInfo();
@@ -34,13 +32,14 @@ public class ExportInOut {
                         rmvProcess(sc);
                         break;
                     case 4:
+                        sc.close();
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai!");
                         break;
                 }
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai, hay nhap lai!");
             }
 
@@ -50,29 +49,28 @@ public class ExportInOut {
     private void addProcess(Scanner sc) {
         ExportManagement mgr = storeManagement.getExportManagement();
         String idCode = "";
-        do {
-            idCode = "PX" + new Date().getTime();
-        }
+        do {idCode = "PX" + new Date().getTime();}
         while (mgr.tagExisted(idCode));
 
         ExportTag exportTag = new ExportTag(idCode);
 
         Customer customer = custProcess(sc);
+        if (customer == null) return;
         exportTag.setCustomer(new Customer(customer));
-        System.out.println("Nhap noi dung ghi chu (them dau * vao cuoi" +
-                "noi dung de ket thuc)");
+
+        //sc.useDelimiter("\\*\\n");
         System.out.print("Ghi chu:");
-        sc.useDelimiter("\\*");
-        exportTag.setNote(sc.next());
-        sc.reset();
+        exportTag.setNote(sc.nextLine());
+        //sc.reset();
 
         while (true) {
             System.out.println("1.Them hang");
             System.out.println("2.Xoa hang");
             System.out.println("3.Luu phieu");
             System.out.println("4.Quay lai");
+            System.out.print("Lua chon:");
             try {
-                int key = sc.nextInt();
+                int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
                     case 1:
                         addProProcess(sc, exportTag);
@@ -82,7 +80,6 @@ public class ExportInOut {
                         break;
                     case 3:
                         saveTagProcess(sc, exportTag);
-                        break;
                     case 4:
                         return;
                     default:
@@ -90,8 +87,8 @@ public class ExportInOut {
                         break;
                 }
             }
-            catch (InputMismatchException ex) {
-                System.out.println("Ban nhap sai, hay nhap lai!");
+            catch (NumberFormatException ex) {
+                System.out.println("Ban nhap sai dinh dang");
             }
         }
     }
@@ -115,7 +112,7 @@ public class ExportInOut {
 
         try {
             System.out.print("So luong:");
-            int qlt = sc.nextInt();
+            int qlt = Integer.parseInt(sc.nextLine());
             if (qlt <= product.getQuantity()) {
                 newProduct.setQuantity(qlt);
                 if (!exportTag.addProduct(newProduct))
@@ -126,7 +123,7 @@ public class ExportInOut {
                 System.out.println("San pham trong kho het!");
             }
         }
-        catch (InputMismatchException ex) {
+        catch (NumberFormatException ex) {
             System.out.println("Ban nhap sai, hay nhap nhap lai!");
         }
     }
@@ -147,20 +144,25 @@ public class ExportInOut {
         ProductManagement proMgr = storeManagement.getProductManagement();
         ExportManagement expMgr = storeManagement.getExportManagement();
 
-        Product[] newProducts = exportTag.getProducts();
+        System.out.println("Thong tin phieu xuat:");
+        exportTag.printInfo();
+        System.out.print("Ban chac chan luu chu?(yes/no):");
+        if (sc.nextLine().equals("yes")) {
+            Product[] newProducts = exportTag.getProducts();
 
-        // Cap nhat so luong
-        for (int i=0; i < newProducts.length; i++) {
-            Product p = proMgr.getProductById(newProducts[i].getIdCode());
-            int oldQlt = p.getQuantity();
-            int soldQlt = newProducts[i].getQuantity();
-            p.setQuantity(oldQlt - soldQlt);
+            // Cap nhat so luong
+            for (int i=0; i < newProducts.length; i++) {
+                Product p = proMgr.getProductById(newProducts[i].getIdCode());
+                int oldQlt = p.getQuantity();
+                int soldQlt = newProducts[i].getQuantity();
+                p.setQuantity(oldQlt - soldQlt);
+            }
+
+            if (expMgr.addTag(exportTag))
+                System.out.println("Luu thanh cong");
+            else
+                System.out.println("Luu khong thanh cong");
         }
-
-        if (expMgr.addTag(exportTag))
-            System.out.println("Luu thanh cong");
-        else
-            System.out.println("Luu khong thanh cong");
     }
 
     private Product proProcess(Scanner sc) {
@@ -187,8 +189,10 @@ public class ExportInOut {
         while (i > 0) {
             System.out.print("Ma KH:");
             customer = mgr.getCustomerById(sc.nextLine());
-            if (customer != null)
+            if (customer != null) {
+                customer.printInfo();
                 break;
+            }
             else
                 System.out.println("Ma khach hang khong ton tai!");
 
