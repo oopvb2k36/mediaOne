@@ -88,11 +88,16 @@ public class ExportTag {
     }
 
     public void setCustomer(Customer customer) {
-        this.customer = new Customer(customer);
+        this.customer = customer;
     }
 
     public Customer getCustomer() {
-        return new Customer(customer);
+        return customer;
+    }
+
+    public Product[] getProducts() {
+        Product[] list = new Product[products.size()];
+        return products.toArray(list);
     }
 
     private String idCode;

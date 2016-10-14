@@ -40,7 +40,6 @@ public class StoreInOut {
     }
 
     private void logInProcess(Scanner sc) {
-        sc.reset();
         System.out.print("Ma nhan vien:");
         String idCode = sc.nextLine();
         System.out.print("Ten dang nhap:");
@@ -58,7 +57,6 @@ public class StoreInOut {
 
     private void funcProcess(Scanner sc) {
         while (true) {
-            sc.reset();
             System.out.println("1.Quan ly nhan vien");
             System.out.println("2.Quan ly khach hang");
             System.out.println("3.Quan ly nha cung cap");
@@ -73,6 +71,7 @@ public class StoreInOut {
                 int key = sc.nextInt();
                 switch (key) {
                     case 1: { // TODO: bo sung StaffInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 2: {
@@ -81,12 +80,15 @@ public class StoreInOut {
                         break;
                     }
                     case 3: { // TODO: bo sung ProviderInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 4: { // TODO: bo sung ProductInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 5: { // TODO: bo sung ImportInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 6: {
