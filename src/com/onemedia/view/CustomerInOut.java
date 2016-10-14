@@ -1,6 +1,5 @@
 package com.onemedia.view;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.onemedia.control.*;
 
@@ -13,15 +12,15 @@ public class CustomerInOut {
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            sc.reset();
             System.out.println("QUAN LY KHACH HANG");
             System.out.println("1.In danh sach");
             System.out.println("2.Them khach hang");
             System.out.println("3.Xoa khach hang");
             System.out.println("4.Sua khach hang");
             System.out.println("5.Quay lai");
+            System.out.print("Lua chon:");
             try {
-                int key = sc.nextInt();
+                int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
                     case 1:
                         storeManagement.getCustomerManagement().printInfo();
@@ -34,14 +33,16 @@ public class CustomerInOut {
                         break;
                     case 4:
                         modifyProcess(sc);
+                        break;
                     case 5:
+                        sc.close();
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai");
                         break;
                 }
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai, hay nhap lai");
             }
         }
@@ -63,13 +64,13 @@ public class CustomerInOut {
             System.out.print("Ten:");
             customer.setName(sc.nextLine());
             System.out.print("Dia chi:");
-            customer.setName(sc.nextLine());
+            customer.setAddress(sc.nextLine());
             System.out.print("Chiet khau:");
             try {
-                double num = sc.nextDouble();
+                double num = Double.parseDouble(sc.nextLine());
                 customer.setDiscount(num);
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai chiet khau!");
             }
 
@@ -102,7 +103,6 @@ public class CustomerInOut {
     }
 
     private void modifyProcess(Scanner sc) {
-        sc.reset();
         System.out.print("Ma KH: ");
         String idCode = sc.nextLine();
         CustomerManagement mgr = storeManagement.getCustomerManagement();
@@ -113,21 +113,27 @@ public class CustomerInOut {
 
             String str = "";
             System.out.format("Ten(%s):", customer.getName());
-            str = sc.nextLine();
-            if (!str.equals("")) customer.setName(str);
+            String name = sc.nextLine();
 
             System.out.format("Dia chi(%s):", customer.getAddress());
-            str = sc.nextLine();
-            if (!str.equals("")) customer.setAddress(str);
+            String address = sc.nextLine();
 
             System.out.format("Chiet khau(%s):", customer.getDiscount());
+            double discount = -1;
             try {
-                double discount = sc.nextDouble();
-                customer.setDiscount(discount);
+                discount = Double.parseDouble(sc.nextLine());
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai chiet khau!");
             }
+
+            System.out.print("Ban co sua khong?(yes/no)");
+            if (sc.nextLine().equals("yes")) {
+                if (!name.equals("")) customer.setName(name);
+                if (!address.equals("")) customer.setAddress(address);
+                if (discount >= 0) customer.setDiscount(discount);
+            }
+
             System.out.println("Thong tin sau khi sua:");
             customer.printInfo();
         }

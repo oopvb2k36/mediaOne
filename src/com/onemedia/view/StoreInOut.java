@@ -2,7 +2,7 @@ package com.onemedia.view;
 
 import com.onemedia.control.*;
 
-import java.util.InputMismatchException;
+import java.awt.*;
 import java.util.Scanner;
 
 public class StoreInOut {
@@ -12,30 +12,30 @@ public class StoreInOut {
     }
 
     public void run() {
+        Scanner sc = new Scanner(System.in);
         while (true) {
-            Scanner sc = new Scanner(System.in);
             System.out.println("1.Dang nhap");
             System.out.println("2.Dang xuat");
             System.out.println("3.Thoat");
             System.out.print("Lua chon:");
             try {
-                int key = sc.nextInt();
+                int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
                     case 1: logInProcess(sc);
                         break;
                     case 2: storeManagement.logOut();
                         break;
                     case 3:
+                        sc.close();
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai!");
                         break;
                 }
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai, hay nhap lai!");
             }
-
         }
     }
 
@@ -47,6 +47,7 @@ public class StoreInOut {
         String user = sc.nextLine();
         System.out.print("Mat khau:");
         String pass = sc.nextLine();
+        System.out.format("Ban da nhap: %s, %s, %s\n", idCode, user, pass);
         Staff loggedStaff = storeManagement.logIn(idCode, user, pass);
         if (loggedStaff == null) {
             System.out.println("Dang nhap khong thanh cong!");
@@ -58,7 +59,6 @@ public class StoreInOut {
 
     private void funcProcess(Scanner sc) {
         while (true) {
-            sc.reset();
             System.out.println("1.Quan ly nhan vien");
             System.out.println("2.Quan ly khach hang");
             System.out.println("3.Quan ly nha cung cap");
@@ -70,9 +70,10 @@ public class StoreInOut {
             System.out.println("9.Tro lai");
             System.out.print("Lua chon:");
             try {
-                int key = sc.nextInt();
+                int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
                     case 1: { // TODO: bo sung StaffInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 2: {
@@ -81,12 +82,15 @@ public class StoreInOut {
                         break;
                     }
                     case 3: { // TODO: bo sung ProviderInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 4: { // TODO: bo sung ProductInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 5: { // TODO: bo sung ImportInOut
+                        System.out.println("Dang xay dung");
                         break;
                     }
                     case 6: {
@@ -109,7 +113,7 @@ public class StoreInOut {
                         break;
                 }
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai, hay nhap lai!");
             }
         }
@@ -124,7 +128,7 @@ public class StoreInOut {
             System.out.println("4.Quay lai");
             try {
                 System.out.print("Lua chon:");
-                int key = sc.nextInt();
+                int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
                     case 1:
                         storeManagement.printInfo();
@@ -142,7 +146,7 @@ public class StoreInOut {
                         break;
                 }
             }
-            catch (InputMismatchException ex) {
+            catch (NumberFormatException ex) {
                 System.out.println("Ban nhap sai, hay nhap lai!");
             }
         }
