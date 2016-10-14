@@ -203,13 +203,29 @@ public class ExportInOut {
 
     private void rmvProcess(Scanner sc) {
         ExportManagement expMgr = storeManagement.getExportManagement();
+        ProductManagement proMgr = storeManagement.getProductManagement();
         expMgr.printInfo();
         System.out.print("Nhap ma phieu:");
         String idCode = sc.nextLine();
         System.out.print("Ban co chac chan xoa khong?(yes/no):");
         if (sc.nextLine().equals("yes")) {
-            expMgr.rmvTag(idCode);
-            expMgr.printInfo();
+            ExportTag rmvTag = expMgr.rmvTag(idCode);
+            if (rmvTag != null) {
+                Product[] products = rmvTag.getProducts();
+
+                // Cap nhat so luong
+                for (int i=0; i < products.length; i++) {
+                    Product p = proMgr.getProductById(products[i].getIdCode());
+                    int oldQlt = p.getQuantity();
+                    int rtnQlt = products[i].getQuantity();
+                    p.setQuantity(oldQlt + rtnQlt);
+                }
+
+                expMgr.printInfo();
+            }
+            else {
+                System.out.println("Ma phieu khong ton tai!");
+            }
         }
     }
 
