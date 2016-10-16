@@ -14,36 +14,57 @@ public class ExportTag {
     }
 
     public double getMoneyTotal() {
-        // TODO: Bổ sung tính tổng tiền trên phiếu
-
-        /*
-        Dựa vào đơn giá bán, số lượng để tính
-         */
-        return 0;
+        double sum = 0;
+        for (Product o : products) {
+            sum += o.getSellPrice() *
+                    o.getDiscount() *
+                    customer.getDiscount();
+        }
+        return sum;
     }
 
     public boolean addProduct(Product product) {
-        // TODO: Bổ sung thêm sản phẩm bán
-
-        /*
-        Kiểm tra idCode xem đã có trong products chưa?
-        Nếu chưa có thì thêm mới
-         */
+        if (product == null) return false;
+        for (Product o : products) {
+            if (o.getIdCode().equals(product.getIdCode()))
+                return false;
+        }
+        products.add(product);
         return true;
     }
 
     public boolean rmvProduct(String idCode) {
-        // TODO: Bổ sung xóa sản phẩm
-
-        /*
-        Kiểm tra dựa trên idCode xem có trong products ko?
-        Nếu có thì xóa bỏ
-         */
-        return true;
+        for (int i=0; i < products.size(); i++) {
+            Product o = products.get(i);
+            if (o.getIdCode().equals(idCode)) {
+                products.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma phieu: %s, Thoi gian: %s, " +
+                        "Ghi chu: %s, Ma KH: %s\n",
+                idCode,
+                new Date(timeStamp).toString(),
+                note,
+                customer.getIdCode()
+                );
+        System.out.println("Danh sach san pham dinh kem:");
+        for (Product o : products) {
+            System.out.format("Ma SP: %s, Ten: %s, " +
+                            "Don gia: %s, So luong: %s, Chiet khau: %s\n",
+                    o.getIdCode(),
+                    o.getName(),
+                    o.getSellUnitPrice(),
+                    o.getQuantity(),
+                    o.getDiscount()
+                    );
+        }
+        System.out.println("Tong tien: " + getMoneyTotal());
+
     }
 
     public void setIdCode(String idCode) {
@@ -67,11 +88,16 @@ public class ExportTag {
     }
 
     public void setCustomer(Customer customer) {
-        this.customer = new Customer(customer);
+        this.customer = customer;
     }
 
     public Customer getCustomer() {
-        return new Customer(customer);
+        return customer;
+    }
+
+    public Product[] getProducts() {
+        Product[] list = new Product[products.size()];
+        return products.toArray(list);
     }
 
     private String idCode;

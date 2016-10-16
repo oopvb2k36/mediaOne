@@ -16,7 +16,9 @@ public class Store {
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin ra màn hình
+        System.out.format("Ten: %s, Dia chi: %s, Giam doc: %s, Dien thoai: %s," +
+                " Website: %s, MST: %s",
+                name, address, director, phone, website, taxCode);
     }
 
     public void setName(String name) {

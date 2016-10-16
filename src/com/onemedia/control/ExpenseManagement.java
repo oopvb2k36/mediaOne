@@ -9,22 +9,45 @@ public class ExpenseManagement {
     }
 
     public boolean addTag(ExpenseTag expenseTag) {
-        // TODO: bổ sung thêm phiếu chi phí ngoài
+        if (expenseTag == null) return false;
+        for (ExpenseTag o : expenseTags) {
+            if (o.getIdCode().equals(expenseTag.getIdCode()))
+                return false;
+        }
         return true;
     }
 
     public ExpenseTag rmvTag(String idCode) {
-        // TODO: bổ sung xóa phiếu chi phí ngoài
+        for (int i=0; i < expenseTags.size(); i++) {
+            ExpenseTag expenseTag = expenseTags.get(i);
+            if (expenseTag.getIdCode().equals(idCode)) {
+                expenseTags.remove(i);
+                return expenseTag;
+            }
+        }
         return null;
     }
 
     public boolean tagExisted(String idCode) {
-        // TODO: bổ sung kiểm tra phiếu chi phí
-        return true;
+        for (ExpenseTag o : expenseTags) {
+            if (o.getIdCode().equals(idCode))
+                return true;
+        }
+        return false;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in danh sách phiếu chi phí ngoài
+        for (ExpenseTag expenseTag : expenseTags) {
+            expenseTag.printInfo();
+        }
+    }
+
+    public double getMoneyTotal() {
+        double sum = 0;
+        for (ExpenseTag expenseTag : expenseTags) {
+            sum += expenseTag.getPaidMoney();
+        }
+        return sum;
     }
 
     ArrayList<ExpenseTag> expenseTags;
