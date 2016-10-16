@@ -32,6 +32,7 @@ public class Staff {
 
     public void printInfo() {
         // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma NV %s, Ten %s,Dia chi %s, Luong %d, ");
     }
 
     public void setIdCode(String idCode) {
