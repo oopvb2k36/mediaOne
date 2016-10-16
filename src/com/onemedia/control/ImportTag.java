@@ -14,35 +14,53 @@ public class ImportTag {
     }
 
     public double getMoneyTotal() {
-        // TODO: Bổ sung tính tổng tiền phiếu
-
-        /*
-        Dựa vào đơn giá mua và số lượng để tính
-         */
-        return 0;
+        double sum = 0;
+        for (Product o : products) {
+            sum += o.getCostPrice();
+        }
+        return sum;
     }
 
     public boolean addProduct(Product product) {
-        // TODO: Bổ sung thêm sản phẩm
+        String idCode = product.getIdCode();
+        for (Product o : products) {
+            if (o.getIdCode().equals(idCode)) return false;
+        }
 
-        /*
-        Kiểm tra idCode của product này đã có trong products chưa?
-        Nếu chưa có thì thêm mới
-         */
+        products.add(product);
         return true;
     }
 
     public boolean rmvProduct(String idCode) {
-        // TODO: Bổ sung xóa sản phẩm
-
-        /*
-        Dựa vào idCode để tìm trong products
-         */
-        return true;
+        for (int i=0; i < products.size(); i++) {
+            Product o = products.get(i);
+            if (o.getIdCode().equals(idCode)) {
+                products.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin ra màn hình
+        System.out.format("Ma phieu: %s, Thoi gian: %s, " +
+                        "Ghi chu: %s, Ma NCC: %s\n",
+                idCode,
+                new Date(timeStamp).toString(),
+                note,
+                provider.getIdCode()
+        );
+        System.out.println("Danh sach san pham dinh kem:");
+        for (Product o : products) {
+            System.out.format("Ma SP: %s, Ten: %s, " +
+                            "Don gia: %s, So luong: %s\n",
+                    o.getIdCode(),
+                    o.getName(),
+                    o.getCostUnitPrice(),
+                    o.getQuantity()
+            );
+        }
+        System.out.println("Tong tien: " + getMoneyTotal());
     }
 
     public void setIdCode(String idCode) {
@@ -71,6 +89,11 @@ public class ImportTag {
 
     public Provider getProvider() {
         return new Provider(provider);
+    }
+
+    public Product[] getProducts() {
+        Product[] proList = new Product[products.size()];
+        return products.toArray(proList);
     }
 
     private String idCode;

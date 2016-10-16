@@ -9,26 +9,45 @@ public class ImportManagement {
     }
 
     public boolean addTag(ImportTag importTag) {
-        // TODO: bổ sung thêm phiếu nhập hàng
+        String idCode = importTag.getIdCode();
+        for (ImportTag o : importTags) {
+            if (o.getIdCode().equals(idCode))return false;
+        }
+
+        importTags.add(importTag);
         return true;
     }
 
     public ImportTag rmvTag(String idCode) {
-        // TODO: bổ sung xóa phiếu nhập
-
-        /*
-        return phiếu nhập bị xóa
-         */
+        for (int i=0; i < importTags.size(); i++) {
+            ImportTag importTag = importTags.get(i);
+            if (importTag.getIdCode().equals(idCode)) {
+                importTags.remove(i);
+                return importTag;
+            }
+        }
         return null;
     }
 
     public boolean tagExisted(String idCode) {
-        // TODO: bổ sung kiểm tra phiếu nhập
-        return true;
+        for (ImportTag o : importTags) {
+            if (o.getIdCode().equals(idCode)) return true;
+        }
+        return false;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in danh sách phiếu nhập
+        for (ImportTag importTag : importTags) {
+            importTag.printInfo();
+        }
+    }
+
+    public double getMoneyTotal() {
+        double sum = 0;
+        for (ImportTag importTag : importTags) {
+            sum += importTag.getMoneyTotal();
+        }
+        return sum;
     }
 
     private ArrayList<ImportTag> importTags;

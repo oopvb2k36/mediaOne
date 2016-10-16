@@ -24,7 +24,8 @@ public class Customer {
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin ra màn hình
+        System.out.format("Ma KH: %s, Ten: %s, Dia chi: %s, Chiet khau: %s\n",
+                idCode, name, address, discount);
     }
 
     public void setIdCode(String idCode) {
