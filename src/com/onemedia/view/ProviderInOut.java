@@ -1,7 +1,15 @@
 package com.onemedia.view;
+<<<<<<< Updated upstream
 import com.onemedia.control.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+=======
+
+import com.onemedia.control.*;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+>>>>>>> Stashed changes
 
 /**
  * Created by Thomas Lewis on 10/13/2016.
@@ -52,12 +60,37 @@ public class ProviderInOut {
 
                     break;
                 case 2:
+<<<<<<< Updated upstream
 
                     break;
                 case 3:
                     break;
                 case 4:
                     break;
+=======
+                        Scanner sc2 = new Scanner(System.in); sc2.reset();
+                        ProviderManagement providerManagement1 = new ProviderManagement();
+                        System.out.println("Nhap ID nha cung cap can xoa");
+                        String idx = sc2.nextLine(); sc2.reset();
+                        boolean ktr2 = providerManagement1.providerExisted(idx);
+
+                    if (ktra = false) {
+                        System.out.println("Nha cung cap nay khong ton tai");
+                    }
+                    else{
+                        providerManagement1.rmvProvider(idx);
+                    }
+
+                    break;
+                case 3:
+                        ProviderManagement providerManagement2 = new ProviderManagement();
+                        providerManagement2.printInfo();
+                    break;
+                case 4:
+                        return;
+                default:
+                    System.out.println("Ban da nhap sai, hay nhap lai!");
+>>>>>>> Stashed changes
             }
 
         }
@@ -66,7 +99,16 @@ public class ProviderInOut {
             System.out.println("Ban da nhap sai, hay nhap lai!");
         }
 
+<<<<<<< Updated upstream
     }
         private StoreManagement storeManagement;
 
+=======
+
+
+    }
+        private StoreManagement storeManagement;
+
+
+>>>>>>> Stashed changes
 }
