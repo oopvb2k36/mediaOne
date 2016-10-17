@@ -101,7 +101,7 @@ public class StoreInOut {
                     }
                     case 7: {
                         ExpenseInOut o = new ExpenseInOut(storeManagement);
-                        o.run();
+                        o.run(sc);
                         break;
                     }
                     case 8:

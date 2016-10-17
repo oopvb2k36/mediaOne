@@ -14,6 +14,7 @@ public class ExpenseManagement {
             if (o.getIdCode().equals(expenseTag.getIdCode()))
                 return false;
         }
+        expenseTags.add(expenseTag);
         return true;
     }
 
