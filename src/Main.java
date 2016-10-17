@@ -5,16 +5,15 @@ import com.onemedia.view.*;
 public class Main {
     public static void main(String[] args) {
         StoreManagement storeManagement = new StoreManagement();
-        //StoreInOut storeInOut = new StoreInOut(storeManagement);
-        //storeInOut.run();
 
+        SampleData.MakeStaffs(storeManagement.getStaffManagement());
         SampleData.MakeCustomers(storeManagement.getCustomerManagement());
+        SampleData.MakeProviders(storeManagement.getProviderManagement());
+        SampleData.MakeProducts(storeManagement.getProductManagement());
+        SampleData.MakeExpenses(storeManagement.getExpenseManagement());
 
-        //CustomerInOut customerInOut = new CustomerInOut(storeManagement);
-        //customerInOut.run();
-
-        ExportInOut exportInOut = new ExportInOut(storeManagement);
-        exportInOut.run();
+        StoreInOut storeInOut = new StoreInOut(storeManagement);
+        storeInOut.run();
 
         System.out.println("Ket thuc chuong trinh!");
     }

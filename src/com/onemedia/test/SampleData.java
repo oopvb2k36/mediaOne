@@ -147,6 +147,28 @@ public class SampleData {
         }
     }
 
+    public static void MakeExpenses(ExpenseManagement mgr) {
+        try {
+            FileReader in = new FileReader("expenses.csv");
+            BufferedReader reader = new BufferedReader(in);
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                String[] token = line.split(",");
+                ExpenseTag o = new ExpenseTag(token[0]);
+                o.setPaidMoney(Double.parseDouble(token[1]));
+                o.setNote(token[2]);
+                mgr.addTag(o);
+            }
+            reader.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private static void initProduct(Product product, String[] token) {
         product.setIdCode(token[1]);
         product.setName(token[2]);
