@@ -21,7 +21,8 @@ public class Provider {
     }
 
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma NCC: %s, Ten: %s, Dia chi: %s\n",
+                idCode, name, address);
     }
 
     public void setIdCode(String idCode) {

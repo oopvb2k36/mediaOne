@@ -2,7 +2,6 @@ package com.onemedia.view;
 
 import com.onemedia.control.*;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class StoreInOut {
@@ -40,7 +39,6 @@ public class StoreInOut {
     }
 
     private void logInProcess(Scanner sc) {
-        sc.reset();
         System.out.print("Ma nhan vien:");
         String idCode = sc.nextLine();
         System.out.print("Ten dang nhap:");
@@ -67,35 +65,38 @@ public class StoreInOut {
             System.out.println("6.Quan ly xuat hang");
             System.out.println("7.Quan ly chi phi");
             System.out.println("8.Quan ly thong tin cua hang");
-            System.out.println("9.Tro lai");
+            System.out.println("9.Quay lai");
             System.out.print("Lua chon:");
             try {
                 int key = Integer.parseInt(sc.nextLine());
                 switch (key) {
-                    case 1: { // TODO: bo sung StaffInOut
-                        System.out.println("Dang xay dung");
+                    case 1: {
+                        StaffInOut o = new StaffInOut(storeManagement);
+                        o.run(sc);
                         break;
                     }
                     case 2: {
                         CustomerInOut o = new CustomerInOut(storeManagement);
-                        o.run();
+                        o.run(sc);
                         break;
                     }
-                    case 3: { // TODO: bo sung ProviderInOut
-                        System.out.println("Dang xay dung");
+                    case 3: {
+                        ProviderInOut o = new ProviderInOut(storeManagement);
+                        o.run(sc);
                         break;
                     }
                     case 4: { // TODO: bo sung ProductInOut
                         System.out.println("Dang xay dung");
                         break;
                     }
-                    case 5: { // TODO: bo sung ImportInOut
-                        System.out.println("Dang xay dung");
+                    case 5: {
+                        ImportInOut o = new ImportInOut(storeManagement);
+                        o.run(sc);
                         break;
                     }
                     case 6: {
                         ExportInOut o = new ExportInOut(storeManagement);
-                        o.run();
+                        o.run(sc);
                         break;
                     }
                     case 7: {
@@ -114,7 +115,7 @@ public class StoreInOut {
                 }
             }
             catch (NumberFormatException ex) {
-                System.out.println("Ban nhap sai, hay nhap lai!");
+                System.out.println("Ban nhap sai dinh dang!");
             }
         }
     }

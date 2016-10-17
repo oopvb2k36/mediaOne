@@ -9,8 +9,7 @@ public class CustomerInOut {
         this.storeManagement = storeManagement;
     }
 
-    public void run() {
-        Scanner sc = new Scanner(System.in);
+    public void run(Scanner sc) {
         while (true) {
             System.out.println("QUAN LY KHACH HANG");
             System.out.println("1.In danh sach");
@@ -35,7 +34,6 @@ public class CustomerInOut {
                         modifyProcess(sc);
                         break;
                     case 5:
-                        sc.close();
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai");
@@ -49,7 +47,6 @@ public class CustomerInOut {
     }
 
     private void addProcess(Scanner sc) {
-        sc.reset();
         System.out.println("Ma khach hang sau khi nhap se duoc he thong" +
                 " tu dong them tien to 'KH'");
         System.out.print("Ma KH:");
@@ -84,7 +81,6 @@ public class CustomerInOut {
     }
 
     private void rmvProcess(Scanner sc) {
-        sc.reset();
         System.out.print("ma KH: ");
         String idCode = sc.nextLine();
         CustomerManagement mgr = storeManagement.getCustomerManagement();

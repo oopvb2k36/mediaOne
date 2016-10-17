@@ -33,7 +33,7 @@ public class Cashier extends Staff {
 
     @Override
     public void printInfo() {
-        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi %s," +
+        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi: %s," +
                         " Luong: %s, Ten dang nhap: %s, Mat khau: %s\n",
                 getIdCode(), getName(), getDateOfBirth(), getAddress(),
                 getSalary(), getUser(), getPass());

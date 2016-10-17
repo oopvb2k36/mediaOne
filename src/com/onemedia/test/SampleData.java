@@ -100,6 +100,7 @@ public class SampleData {
                 o.setIdCode(token[0]);
                 o.setName(token[1]);
                 o.setAddress(token[2]);
+                mgr.addProvider(o);
             }
             reader.close();
         }

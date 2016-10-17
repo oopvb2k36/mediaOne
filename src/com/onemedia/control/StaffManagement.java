@@ -24,7 +24,7 @@ public class StaffManagement {
             Staff staff = staffs.get(i);
             if (staff.getIdCode().equals(idCode)) {
                 staffs.remove(i);
-                return staffs;
+                return staff;
             }
         }
         return null;
@@ -44,6 +44,7 @@ public class StaffManagement {
             Staff staff = staffs.get(i);
             if (staff.getIdCode().equals(idCode))
                 return staff;
+        }
         return null;
     }
 

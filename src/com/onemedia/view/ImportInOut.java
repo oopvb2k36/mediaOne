@@ -5,69 +5,59 @@ import com.onemedia.control.*;
 import java.util.Date;
 import java.util.Scanner;
 
-/**
- * Created by Thomas Lewis on 10/14/2016.
- */
 public class ImportInOut {
-
-
-
-    public ImportInOut(ImportManagement importManagement){this.importManagement = importManagement;}
-    public ImportInOut(StoreManagement storeManagement){this.storeManagement = storeManagement;}
-
-
-    public void run(){
-        Scanner sc = new Scanner(System.in);
-        while (true){
-            System.out.println("1. Them phieu nhap hang");
-            System.out.println("2. Xoa phieu nhap hang");
-            System.out.println("3. Kiem tra phieu nhap");
-            System.out.println("4. In danh sach phieu nhap");
-            System.out.println("5. Tinh tong tien");
-
-         try {
-             int key = Integer.parseInt(sc.nextLine());
-             switch (key){
-                 case 1:
-                        addProcess(sc);
-                     break;
-                 case 2:
-                        rmvProcess(sc);
-                     break;
-                 case 3:
-
-                     break;
-                 case 4:
-                     break;
-                 case 5:
-                     break;
-             }
-        }
-        catch (NumberFormatException ex){
-
-           }
-        }
-
+    public  ImportInOut(StoreManagement storeManagement) {
+        this.storeManagement = storeManagement;
     }
 
+    public void run(Scanner sc) {
+        while (true) {
+            System.out.println("QUAN LY NHAP HANG");
+            System.out.println("1.In danh sach");
+            System.out.println("2.Them phieu nhap");
+            System.out.println("3.Xoa phieu nhap");
+            System.out.println("4.Quay lai");
+            try {
+                System.out.print("Lua chon:");
+                int key = Integer.parseInt(sc.nextLine());
+                switch (key) {
+                    case 1:
+                        storeManagement.getImportManagement().printInfo();
+                        break;
+                    case 2:
+                        addProcess(sc);
+                        break;
+                    case 3:
+                        rmvProcess(sc);
+                        break;
+                    case 4:
+                        return;
+                    default:
+                        System.out.println("Ban nhap sai, hay nhap lai!");
+                        break;
+                }
+            }
+            catch (NumberFormatException ex) {
+                System.out.println("Ban nhap sai, hay nhap lai!");
+            }
 
+        }
+    }
 
     private void addProcess(Scanner sc) {
-        ImportManagement mgr = StoreManagement.getImportManagement();
+        ImportManagement mgr = storeManagement.getImportManagement();
         String idCode = "";
         do {idCode = "PN" + new Date().getTime();}
         while (mgr.tagExisted(idCode));
 
         ImportTag importTag = new ImportTag(idCode);
 
-        Provider provider = provProcess(sc);
+        Provider provider = proviProcess(sc);
         if (provider == null) return;
         importTag.setProvider(new Provider(provider));
 
-        //sc.useDelimiter("\\*\\n");
         System.out.print("Ghi chu:");
         importTag.setNote(sc.nextLine());
-        //sc.reset();
 
         while (true) {
             System.out.println("1.Them hang");
@@ -99,29 +89,6 @@ public class ImportInOut {
         }
     }
 
-    private ImportManagement importManagement;
-
-    private Provider provProcess(Scanner sc) {
-        StoreManagement storeManagement = new StoreManagement();
-        ProviderManagement mgr = storeManagement.getProviderManagement();
-        Customer customer = null;
-        int i = 3;
-        Provider provider;
-        while (i > 0) {
-            System.out.print("Ma NCC:");
-            provider = mgr.getProviderById(sc.nextLine());
-            if (provider != null) {
-                provider.printInfo();
-                break;
-            }
-            else
-                System.out.println("Ma nha cung cap khong ton tai!");
-
-            i--;
-        }
-        return provider;
-    }
-
     public void addProProcess(Scanner sc, ImportTag importTag) {
         Product product = proProcess(sc);
         if (product == null) return;
@@ -142,7 +109,7 @@ public class ImportInOut {
         try {
             System.out.print("So luong:");
             int qlt = Integer.parseInt(sc.nextLine());
-            /* if (qlt <= product.getQuantity()) {
+            if (qlt <= product.getQuantity()) {
                 newProduct.setQuantity(qlt);
                 if (!importTag.addProduct(newProduct))
                     System.out.println("Them san pham khong thanh cong!\n" +
@@ -150,7 +117,7 @@ public class ImportInOut {
             }
             else {
                 System.out.println("San pham trong kho het!");
-            }   */
+            }
         }
         catch (NumberFormatException ex) {
             System.out.println("Ban nhap sai, hay nhap nhap lai!");
@@ -170,7 +137,6 @@ public class ImportInOut {
     }
 
     public void saveTagProcess(Scanner sc, ImportTag importTag) {
-        StoreManagement storeManagement = new StoreManagement();
         ProductManagement proMgr = storeManagement.getProductManagement();
         ImportManagement impMgr = storeManagement.getImportManagement();
 
@@ -184,8 +150,8 @@ public class ImportInOut {
             for (int i=0; i < newProducts.length; i++) {
                 Product p = proMgr.getProductById(newProducts[i].getIdCode());
                 int oldQlt = p.getQuantity();
-                int boughtQlt = newProducts[i].getQuantity();
-                p.setQuantity(oldQlt + boughtQlt);
+                int impQlt = newProducts[i].getQuantity();
+                p.setQuantity(oldQlt + impQlt);
             }
 
             if (impMgr.addTag(importTag))
@@ -196,7 +162,6 @@ public class ImportInOut {
     }
 
     private Product proProcess(Scanner sc) {
-        StoreManagement storeManagement = new StoreManagement();
         ProductManagement mgr = storeManagement.getProductManagement();
         Product product = null;
         int i = 3;
@@ -213,20 +178,19 @@ public class ImportInOut {
         return product;
     }
 
-    private Provider provnProcess(Scanner sc) {
-        StoreManagement storeManagement = new StoreManagement();
+    private Provider proviProcess(Scanner sc) {
         ProviderManagement mgr = storeManagement.getProviderManagement();
         Provider provider = null;
         int i = 3;
         while (i > 0) {
-            System.out.print("Ma NCC:");
+            System.out.print("Ma KH:");
             provider = mgr.getProviderById(sc.nextLine());
             if (provider != null) {
                 provider.printInfo();
                 break;
             }
             else
-                System.out.println("Ma nha cung cap khong ton tai!");
+                System.out.println("Ma khach hang khong ton tai!");
 
             i--;
         }
@@ -234,7 +198,6 @@ public class ImportInOut {
     }
 
     private void rmvProcess(Scanner sc) {
-        StoreManagement storeManagement = new StoreManagement();
         ImportManagement impMgr = storeManagement.getImportManagement();
         ProductManagement proMgr = storeManagement.getProductManagement();
         impMgr.printInfo();
@@ -251,7 +214,7 @@ public class ImportInOut {
                     Product p = proMgr.getProductById(products[i].getIdCode());
                     int oldQlt = p.getQuantity();
                     int rtnQlt = products[i].getQuantity();
-                    p.setQuantity(oldQlt + rtnQlt);
+                    p.setQuantity(oldQlt - rtnQlt);
                 }
 
                 impMgr.printInfo();
@@ -261,4 +224,7 @@ public class ImportInOut {
             }
         }
     }
+
+    private StoreManagement storeManagement;
+
 }

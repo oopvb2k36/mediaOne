@@ -11,8 +11,7 @@ public class StaffInOut {
         this.storeManagement = storeManagement;
     }
 
-    public void run() {
-        Scanner sc = new Scanner(System.in);
+    public void run(Scanner sc) {
         while (true){
             System.out.println("QUAN LY NHAN VIEN");
             System.out.println("1.In danh sach");
@@ -37,7 +36,6 @@ public class StaffInOut {
                         rmvProcess(sc);
                         break;
                     case 5:
-                        sc.close();
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai");
@@ -102,16 +100,16 @@ public class StaffInOut {
                 switch (key) {
                     case 1:
                         addDirector(sc, newStaff);
-                        break;
+                        return;
                     case 2:
                         addManager(sc, newStaff);
-                        break;
+                        return;
                     case 3:
                         addCashier(sc, newStaff);
-                        break;
+                        return;
                     case 4:
                         addstaff(sc, newStaff);
-                        break;
+                        return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai!");
                         break;
@@ -136,9 +134,9 @@ public class StaffInOut {
         System.out.print("Mat khau:");
         director.setPass(sc.nextLine());
 
-        System.out.format("Phu cap dang duoc cai dat: %s", director.getAllowance());
+        System.out.format("Phu cap dang duoc cai dat: %s\n", director.getAllowance());
         System.out.println("Neu muon thay doi, hay nhap gia tri moi, con khong" +
-                "thi hay de trong!");
+                " thi hay de trong!");
         System.out.print("Phu cap: ");
         try {
             double allowance = Double.parseDouble(sc.nextLine());
@@ -160,9 +158,9 @@ public class StaffInOut {
         System.out.print("Mat khau:");
         manager.setPass(sc.nextLine());
 
-        System.out.format("Phu cap dang duoc cai dat: %s", manager.getAllowance());
+        System.out.format("Phu cap dang duoc cai dat: %s\n", manager.getAllowance());
         System.out.println("Neu muon thay doi, hay nhap gia tri moi, con khong" +
-                "thi hay de trong!");
+                " thi hay de trong!");
         System.out.print("Phu cap: ");
         try {
             double allowance = Double.parseDouble(sc.nextLine());

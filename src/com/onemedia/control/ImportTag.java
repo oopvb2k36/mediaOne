@@ -84,11 +84,11 @@ public class ImportTag {
     }
 
     public void setProvider(Provider provider) {
-        this.provider = new Provider(provider);
+        this.provider = provider;
     }
 
     public Provider getProvider() {
-        return new Provider(provider);
+        return provider;
     }
 
     public Product[] getProducts() {

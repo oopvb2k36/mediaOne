@@ -30,7 +30,7 @@ public class Staff {
     }
 
     public void printInfo() {
-        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi %s, Luong: %s\n",
+        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi: %s, Luong: %s\n",
                 idCode, name, dateOfBirth.toString(), address, getSalary());
     }
 

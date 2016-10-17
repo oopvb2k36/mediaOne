@@ -10,14 +10,13 @@ public class ExportInOut {
         this.storeManagement = storeManagement;
     }
 
-    public void run() {
-        Scanner sc = new Scanner(System.in);
+    public void run(Scanner sc) {
         while (true) {
             System.out.println("QUAN LY XUAT HANG");
             System.out.println("1.In danh sach");
             System.out.println("2.Them phieu xuat");
             System.out.println("3.Xoa phieu xuat");
-            System.out.println("4.Thoat");
+            System.out.println("4.Quay lai");
             try {
                 System.out.print("Lua chon:");
                 int key = Integer.parseInt(sc.nextLine());
@@ -32,7 +31,6 @@ public class ExportInOut {
                         rmvProcess(sc);
                         break;
                     case 4:
-                        sc.close();
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai!");
@@ -58,10 +56,8 @@ public class ExportInOut {
         if (customer == null) return;
         exportTag.setCustomer(new Customer(customer));
 
-        //sc.useDelimiter("\\*\\n");
         System.out.print("Ghi chu:");
         exportTag.setNote(sc.nextLine());
-        //sc.reset();
 
         while (true) {
             System.out.println("1.Them hang");

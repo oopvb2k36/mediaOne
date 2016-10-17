@@ -1,114 +1,123 @@
 package com.onemedia.view;
-<<<<<<< Updated upstream
-import com.onemedia.control.*;
-import java.util.Scanner;
-import java.util.InputMismatchException;
-=======
 
+import java.util.Scanner;
 import com.onemedia.control.*;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
->>>>>>> Stashed changes
-
-/**
- * Created by Thomas Lewis on 10/13/2016.
- */
 public class ProviderInOut {
-    private Provider pnv;
 
     public ProviderInOut(StoreManagement storeManagement) {
         this.storeManagement = storeManagement;
     }
 
-
-    // Ham bat dau la ham run
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("QUAN LY NHA CUNG CAP");
-        System.out.println("1. Them nha cung cap");
-        System.out.println("2. Xoa nha cung cap");
-        System.out.println("3. In thong tin");
-        System.out.println("4. Thoat");
-        try {
-            System.out.println("Lua chon 1 2 3 hoac 4:");
-            int key = sc.nextInt();
-    // Re nhanh cac lua chon
-            switch (key){
-
-                case 1:
-                    System.out.println("Them nha cung cap moi! \n ID nha cung cap moi:");
-                        Scanner sc1 = new Scanner(System.in);
-                        String idn = sc1.nextLine(); sc1.reset();
-                // Kiem tra nha cung cap moi da ton tai chua
-                    ProviderManagement providerManagement = new ProviderManagement();
-                   boolean ktra= providerManagement.providerExisted(idn);
-
-                    if (ktra = true ){
-                        System.out.println("Nha cung cap nay da ton tai!");
-                    }
-                    else{
-                        System.out.println("Ma nha cung cap se tu dong them tien to 'NCC' ");
-                        String idcode = "NCC"+idn;
-                        System.out.println("Ten nha cung cap moi: ");
-                        String name = sc1.nextLine(); sc1.reset();
-                        String address = sc1.nextLine(); sc1.reset();
-                        Provider pvn = new Provider(idcode, name, address);
-                    // Them nha cung cap
-                        providerManagement.addProvider(pnv);
-                    };
-
-                    break;
-                case 2:
-<<<<<<< Updated upstream
-
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-=======
-                        Scanner sc2 = new Scanner(System.in); sc2.reset();
-                        ProviderManagement providerManagement1 = new ProviderManagement();
-                        System.out.println("Nhap ID nha cung cap can xoa");
-                        String idx = sc2.nextLine(); sc2.reset();
-                        boolean ktr2 = providerManagement1.providerExisted(idx);
-
-                    if (ktra = false) {
-                        System.out.println("Nha cung cap nay khong ton tai");
-                    }
-                    else{
-                        providerManagement1.rmvProvider(idx);
-                    }
-
-                    break;
-                case 3:
-                        ProviderManagement providerManagement2 = new ProviderManagement();
-                        providerManagement2.printInfo();
-                    break;
-                case 4:
+    public void run(Scanner sc) {
+        while (true) {
+            System.out.println("QUAN LY NHA CUNG CAP");
+            System.out.println("1.In danh sach");
+            System.out.println("2.Them nha cung cap");
+            System.out.println("3.Xoa nha cung cap");
+            System.out.println("4.Sua nha cung cap");
+            System.out.println("5.Quay lai");
+            System.out.print("Lua chon:");
+            try {
+                int key = Integer.parseInt(sc.nextLine());
+                switch (key) {
+                    case 1:
+                        storeManagement.getProviderManagement().printInfo();
+                        break;
+                    case 2:
+                        addProcess(sc);
+                        break;
+                    case 3:
+                        rmvProcess(sc);
+                        break;
+                    case 4:
+                        modifyProcess(sc);
+                        break;
+                    case 5:
                         return;
-                default:
-                    System.out.println("Ban da nhap sai, hay nhap lai!");
->>>>>>> Stashed changes
+                    default:
+                        System.out.println("Ban nhap sai, hay nhap lai");
+                        break;
+                }
+            }
+            catch (NumberFormatException ex) {
+                System.out.println("Ban nhap sai, hay nhap lai");
+            }
+        }
+    }
+
+    private void addProcess(Scanner sc) {
+        System.out.println("Ma nha cung cap sau khi nhap se duoc he thong" +
+                " tu dong them tien to 'NCC'");
+        System.out.print("Ma NCC:");
+        String idCode = "NCC" + sc.nextLine();
+        ProviderManagement mgr = storeManagement.getProviderManagement();
+        if (mgr.providerExisted(idCode)) {
+            System.out.println("Ma NCC da ton tai");
+            mgr.getProviderById(idCode).printInfo();
+        }
+        else {
+            Provider provider = new Provider(idCode, "NO NAME");
+            System.out.print("Ten:");
+            provider.setName(sc.nextLine());
+            System.out.print("Dia chi:");
+            provider.setAddress(sc.nextLine());
+
+            System.out.println("Thong tin nha cung cap duoc them:");
+            provider.printInfo();
+            System.out.print("Ban co them khong?(yes/no)");
+            if (sc.nextLine().equals("yes")) {
+                mgr.addProvider(provider);
+            }
+        }
+    }
+
+    private void rmvProcess(Scanner sc) {
+        System.out.print("ma NCC: ");
+        String idCode = sc.nextLine();
+        ProviderManagement mgr = storeManagement.getProviderManagement();
+        Provider provider = mgr.getProviderById(idCode);
+        if (provider != null) {
+            provider.printInfo();
+            System.out.print("Ban co chac chan xoa?(yes/no)");
+            if (sc.nextLine().equals("yes")) {
+                mgr.rmvProvider(idCode);
+            }
+        }
+        else {
+            System.out.println("Ma khach hang khong ton tai");
+        }
+
+    }
+
+    private void modifyProcess(Scanner sc) {
+        System.out.print("Ma NCC: ");
+        String idCode = sc.nextLine();
+        ProviderManagement mgr = storeManagement.getProviderManagement();
+        Provider provider = mgr.getProviderById(idCode);
+        if (provider != null) {
+            System.out.println("Thong tin truoc khi sua:");
+            provider.printInfo();
+
+            System.out.format("Ten(%s):", provider.getName());
+            String name = sc.nextLine();
+
+            System.out.format("Dia chi(%s):", provider.getAddress());
+            String address = sc.nextLine();
+
+            System.out.print("Ban co sua khong?(yes/no)");
+            if (sc.nextLine().equals("yes")) {
+                if (!name.equals("")) provider.setName(name);
+                if (!address.equals("")) provider.setAddress(address);
             }
 
+            System.out.println("Thong tin sau khi sua:");
+            provider.printInfo();
         }
-
-        catch (InputMismatchException ex) {
-            System.out.println("Ban da nhap sai, hay nhap lai!");
+        else {
+            System.out.println("Ma khach hang khong ton tai");
         }
-
-<<<<<<< Updated upstream
     }
-        private StoreManagement storeManagement;
 
-=======
-
-
-    }
-        private StoreManagement storeManagement;
-
-
->>>>>>> Stashed changes
+    private StoreManagement storeManagement;
 }

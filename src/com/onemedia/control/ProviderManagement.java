@@ -9,37 +9,49 @@ public class ProviderManagement {
     }
 
     public boolean addProvider(Provider provider) {
-        // TODO: bổ sung thêm nhà cung cấp
-
-        /*
-        Kiểm tra mã idCode của nhà cung cấp trước khi thêm
-         */
+        if (provider == null) return false;
+        for (int i=0; i < providers.size(); i++) {
+            Provider o = providers.get(i);
+            if (o.getIdCode().equals(provider.getIdCode()))
+                return false;
+        }
+        providers.add(provider);
         return true;
     }
 
     public Provider rmvProvider(String idCode) {
-        // TODO: bổ sung xóa nhà cung cấp
-
-        /*
-        Kiểm tra mã idCode xem có tồn tại không?
-        Nếu có thì xóa
-        return nhà cung cấp bị xóa
-         */
+        for (int i=0; i < providers.size(); i++) {
+            Provider provider = providers.get(i);
+            if (provider.getIdCode().equals(idCode)) {
+                providers.remove(i);
+                return provider;
+            }
+        }
         return null;
     }
 
     public boolean providerExisted(String idCode) {
-        // TODO: bổ sung kiểm tra mã nhà cung cấp
-        return true;
+        for (int i=0; i < providers.size(); i++) {
+            Provider provider = providers.get(i);
+            if (provider.getIdCode().equals(idCode))
+                return true;
+        }
+        return false;
     }
 
     public Provider getProviderById(String idCode) {
-        // TODO: bổ sung tìm kiếm nhà cung cấp
+        for (int i=0; i < providers.size(); i++) {
+            Provider provider = providers.get(i);
+            if (provider.getIdCode().equals(idCode))
+                return provider;
+        }
         return null;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in danh sách nhà cung cấp
+        for (Provider o : providers) {
+            o.printInfo();
+        }
     }
 
     private ArrayList<Provider> providers;
