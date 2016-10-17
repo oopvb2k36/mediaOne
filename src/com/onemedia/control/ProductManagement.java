@@ -9,13 +9,22 @@ public class ProductManagement {
     }
 
     public boolean addProduct(Product product) {
-        // TODO: bổ sung thêm sản phẩm
+        if (product == null) return false;
+        for (int i=0; i < products.size(); i++) {
+            product o = products.get(i);
+            if (product.getIdCode().equals(product.getIdCode()))
+                return false;
         return true;
     }
 
     public Product rmvProduct(String idCode) {
-        // TODO: bổ sung xóa sản phẩm
-
+        for (int i=0; i < products.size(); i++) {
+            Product product = products.get(i);
+            if (product.getIdCode().equals(idCode)) {
+                products.remove(i);
+                return product;
+            }
+        }
         /*
         return sản phẩm bị xóa
          */
@@ -23,17 +32,25 @@ public class ProductManagement {
     }
 
     public boolean productExisted(String idCode) {
-        // TODO: bổ sung kiểm tra sản phẩm
-        return true;
+        for (int i=0; i < products.size(); i++) {
+            Product product = products.get(i);
+            if (product.getIdCode().equals(idCode))
+                return true;
+        return false;
     }
 
     public Product getProductById(String idCode) {
-        // TODO: bổ sung tìm kiếm sản phẩm
+        for (int i=0; i < products.size(); i++) {
+            Product product = products.get(i);
+            if (product.getIdCode().equals(idCode))
+                return product;
         return null;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in danh sách sản phẩm
+        for (Product o : products){
+            o.printInfo();
+        }
     }
 
     private ArrayList<Product> products;

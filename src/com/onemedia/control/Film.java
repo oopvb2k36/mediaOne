@@ -15,6 +15,9 @@ public class Film extends Product {
         super(idCode, name);
     }
 
+    public Film(Product product) {
+        super(product);
+    }
     public Film(Film film) {
         super(film);
         setDirector(film.getDirector());
@@ -25,7 +28,8 @@ public class Film extends Product {
 
     @Override
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma phim: %s, Ten phim: %s, Dao dien: %s, Nhan vat chinh: %s, The loai: %s, Ngay san xuat: %s\n",
+                getIdCode() , getName(), director, actor, genre, issuedDate);
     }
 
     public void setDirector(String director) {

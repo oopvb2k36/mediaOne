@@ -12,6 +12,9 @@ public class Book extends Product {
         super(idCode, name);
     }
 
+    public Book(Product product){
+        super(product);
+    }
     public Book(Book book) {
         super(book);
         setAuthor(book.getAuthor());
@@ -22,7 +25,8 @@ public class Book extends Product {
 
     @Override
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma sach: %s, Ten sach: %s, Tac gia: %s, Nha xuat ban: %s, Ngay san xuat: %s\n",
+               getIdCode() , getName(), author, publisher, issuedDate);
     }
 
     public void setAuthor(String author) {

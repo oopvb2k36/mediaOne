@@ -28,17 +28,23 @@ public abstract class Product {
     }
 
     public double getSellPrice() {
-        // TODO: bổ sung tính giá bán
+        if(quantity!=0){
+            quantity*sellUnitPrice;
+        }
+        else
         return 0;
     }
 
     public double getCostPrice() {
-        // TODO: bổ sung tính giá mua
+        if(quantity!=0){
+            quantity*costUnitPrice;
+        }else
         return 0;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin ra màn hình
+        System.out.format("Ma SP: %s, Ten SP: %s, So luong: %s, Chiet khau: %s\n",
+                idCode, name, quantity, discount);
     }
 
     public void setIdCode(String idCode) {
