@@ -66,3 +66,7 @@ public class ProductInOut {
 
     private StoreManagement storeManagement;
 }
+
+
+
+//viết cho có cái thay đổi
