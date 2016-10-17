@@ -18,6 +18,9 @@ public class Music extends Product {
         issuedDate = null;
     }
 
+    public Music(Product product) {
+        super(product);
+    }
     public Music(Music music) {
         super(music);
         setArtist(music.getArtist());
@@ -27,7 +30,8 @@ public class Music extends Product {
 
     @Override
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma bai hat: %s, Ten bai hat: %s, Nghe sy: %s, The loai: %s, Ngay phat hanh: %s\n",
+                getIdCode() , getName(), artist, genre, issuedDate);
     }
 
     public void setArtist(String artist) {

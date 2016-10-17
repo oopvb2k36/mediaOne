@@ -1,4 +1,5 @@
 package com.onemedia.view;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.onemedia.control.*;
@@ -6,10 +7,11 @@ import com.onemedia.control.*;
  * Created by thanh on 13/10/2016.
  */
 public class ProductInOut {
-    public ProductInOut(StoreManagement storeManagement){
+    public ProductInOut(StoreManagement storeManagement) {
         this.storeManagement = storeManagement;
     }
-    public void run (){
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             sc.reset();
@@ -38,5 +40,29 @@ public class ProductInOut {
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai");
                         break;
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("Ban nhap sai, hay nhap lai");
+            }
+        }
     }
+
+    private void rmvProcess(Scanner sc) {
+        sc.reset();
+        System.out.print("Ma San Pham: ");
+        String idCode = sc.nextLine();
+        ProductManagement mgr = StoreManagement.getProductManagement();
+        Product product = mgr.getProductById(idCode);
+        if (product != null) {
+            product.printInfo();
+            System.out.print("Ban co chac chan xoa?(yes/no)");
+            if (sc.nextLine().equals("yes")) {
+                mgr.rmvProduct(idCode);
+            }
+        }
+        else {
+            System.out.println("Ma san pham khong ton tai");
+        }
+
+    private StoreManagement storeManagement;
 }
