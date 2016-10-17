@@ -9,37 +9,48 @@ public class StaffManagement {
     }
 
     public boolean addStaff(Staff staff) {
-        // TODO: bổ sung lưu thông tin nhân viên
+            if (staff == null) return false;
+            for (int i=0; i < staffs.size(); i++) {
+                Staff o = staffs.get(i);
+                if (o.getIdCode().equals(staff.getIdCode()))
+                    return false;
+            }
+            staffs.add(staff);
+            return true;
+        }
 
-        /*
-        Kiểm tra idCode xem đã tồn tại chưa?
-        Nếu chưa có thì thêm mới
-         */
-        return true;
-    }
-
-    public Staff rmvStaff(String idCode) {
-        // TODO: bổ sung xóa nhân viên
-        /*
-        Tìm xem có tồn tại mã nhân viên đó không?
-        Nếu có thì xóa
-        return nhân viên bị xóa
-         */
+    public Staff rmvStaff (String idCode) {
+        for (int i=0; i < staffs.size(); i++) {
+            Staff staff = staffs.get(i);
+            if (staff.getIdCode().equals(idCode)) {
+                staffs.remove(i);
+                return staffs;
+            }
+        }
         return null;
     }
 
-    public boolean staffExitsed(String idCode) {
-        // TODO: bổ sung kiểm tra mã nhân viên
-        return true;
+    public boolean staffExisted(String idCode) {
+        for (int i=0; i < staffs.size(); i++) {
+            Staff staff = staffs.get(i);
+            if (staff.getIdCode().equals(idCode))
+                return true;
+        }
+        return false;
     }
 
     public Staff getStaffById(String idCode) {
-        // TODO: bổ sung tìm kiếm nhân viên
+        for (int i=0; i < staffs.size(); i++) {
+            Staff staff = staffs.get(i);
+            if (staff.getIdCode().equals(idCode))
+                return staff;
         return null;
     }
 
     public void printInfo() {
-        // TODO: bổ sung in thông tin toàn bộ nhân viên
+        for (Staff o : staffs) {
+            o.printInfo();
+        }
     }
 
 
