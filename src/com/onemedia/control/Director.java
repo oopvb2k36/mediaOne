@@ -12,6 +12,12 @@ public class Director extends Staff {
         super(idCode, name);
     }
 
+    public Director(Staff staff) {
+        super(staff);
+        user = "NO USER";
+        pass = "NO PASS";
+    }
+
     public Director(Director director) {
         super(director);
         setUser(director.getUser());
@@ -20,13 +26,15 @@ public class Director extends Staff {
 
     @Override
     public double getPaid() {
-        // TODO: Bổ sung tính lương
-        return 0;
+        return super.getPaid() + allowance;
     }
 
     @Override
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi %s," +
+                        " Luong: %s, Phu cap: %s, Ten dang nhap: %s, Mat khau: %s\n",
+                getIdCode(), getName(), getDateOfBirth(), getAddress(),
+                getSalary(), allowance, getUser(), getPass());
     }
 
     public void setUser(String user) {

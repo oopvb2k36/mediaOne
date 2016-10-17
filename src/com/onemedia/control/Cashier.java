@@ -14,21 +14,29 @@ public class Cashier extends Staff {
         pass = "NO PASS";
     }
 
-    public Cashier(Cashier cashier) {
-        super(cashier);
+    public Cashier(Staff staff) {
+        super(staff);
         user = "NO USER";
         pass = "NO PASS";
     }
 
+    public Cashier(Cashier cashier) {
+        super(cashier);
+        user = cashier.getUser();
+        pass = cashier.getPass();
+    }
+
     @Override
     public double getPaid() {
-        // TODO: Bổ sung tính lương
-        return 0;
+        return super.getPaid();
     }
 
     @Override
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
+        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi %s," +
+                        " Luong: %s, Ten dang nhap: %s, Mat khau: %s\n",
+                getIdCode(), getName(), getDateOfBirth(), getAddress(),
+                getSalary(), getUser(), getPass());
     }
 
     public void setUser(String user) {

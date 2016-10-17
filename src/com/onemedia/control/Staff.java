@@ -26,13 +26,12 @@ public class Staff {
     }
 
     public double getPaid() {
-        // TODO: Bổ sung tính lương
-        return 0;
+        return salary;
     }
 
     public void printInfo() {
-        // TODO: Bổ sung in thông tin ra màn hình
-        System.out.format("Ma NV %s, Ten %s,Dia chi %s, Luong %d, ");
+        System.out.format("Ma NV %s, Ten %s, Ngay sinh:%s, Dia chi %s, Luong: %s\n",
+                idCode, name, dateOfBirth.toString(), address, getSalary());
     }
 
     public void setIdCode(String idCode) {
