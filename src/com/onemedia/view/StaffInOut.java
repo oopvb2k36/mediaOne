@@ -56,38 +56,13 @@ public class StaffInOut {
         String idCode = "NV" + sc.nextLine();
         if (mgr.staffExisted(idCode)) {
             System.out.println("Ma NV da ton tai!");
-            mgr.getStaffById(idCode);
+            mgr.getStaffById(idCode).printInfo();
             return;
         }
 
         Staff newStaff = new Staff();
         newStaff.setIdCode(idCode);
-
-        System.out.print("Ten: ");
-        newStaff.setName(sc.nextLine());
-
-        System.out.print("Ngay sinh(yyyy-mm-dd): ");
-        try {
-            newStaff.setDateOfBirth(LocalDate.parse(sc.nextLine()));
-        }
-        catch (DateTimeParseException e) {
-            System.out.println("Ban nhap sai dinh dang," +
-                    " he thong se cai dat ngay sinh mac dinh (2000-01-01)");
-            newStaff.setDateOfBirth(LocalDate.parse("2000-01-01"));
-        }
-
-        System.out.print("Dia chi: ");
-        newStaff.setAddress(sc.nextLine());
-
-        System.out.print("Luong: ");
-        try {
-            newStaff.setSalary(Double.parseDouble(sc.nextLine()));
-        }
-        catch (NumberFormatException e) {
-            System.out.println("Ban nhap sai dinh dang," +
-                    " he thong se cai dat luong mac dinh la 0");
-            newStaff.setSalary(0);
-        }
+        appendCommonInfo(sc, newStaff);
 
         System.out.println("Chuc vu: ");
         while (true) {
@@ -108,7 +83,7 @@ public class StaffInOut {
                         addCashier(sc, newStaff);
                         return;
                     case 4:
-                        addstaff(sc, newStaff);
+                        saveStaff(sc, newStaff);
                         return;
                     default:
                         System.out.println("Ban nhap sai, hay nhap lai!");
@@ -121,8 +96,32 @@ public class StaffInOut {
         }
     }
 
-    private void addstaff(Scanner sc, Staff staff) {
-        saveStaff(sc, staff);
+    private void appendCommonInfo(Scanner sc, Staff staff) {
+        System.out.print("Ten: ");
+        staff.setName(sc.nextLine());
+
+        System.out.print("Ngay sinh(yyyy-mm-dd): ");
+        try {
+            staff.setDateOfBirth(LocalDate.parse(sc.nextLine()));
+        }
+        catch (DateTimeParseException e) {
+            System.out.println("Ban nhap sai dinh dang," +
+                    " he thong se cai dat ngay sinh mac dinh (2000-01-01)");
+            staff.setDateOfBirth(LocalDate.parse("2000-01-01"));
+        }
+
+        System.out.print("Dia chi: ");
+        staff.setAddress(sc.nextLine());
+
+        System.out.print("Luong: ");
+        try {
+            staff.setSalary(Double.parseDouble(sc.nextLine()));
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Ban nhap sai dinh dang," +
+                    " he thong se cai dat luong mac dinh la 0");
+            staff.setSalary(0);
+        }
     }
 
     private void addDirector(Scanner sc, Staff staff) {
@@ -221,107 +220,16 @@ public class StaffInOut {
             System.out.println("Thong tin truoc khi sua:");
             staff.printInfo();
 
-            System.out.format("Ten(%s):", staff.getName());
-            String str = sc.nextLine();
-            if (!str.equals("")) {
-                staff.setName(str);
-            }
-
-            System.out.format("Ngay sinh(%s):", staff.getDateOfBirth());
-            str = sc.nextLine();
-            if (!str.equals("")) {
-                try {
-                    staff.setDateOfBirth(LocalDate.parse(str));
-                }
-                catch (DateTimeParseException e) {
-                    System.out.println("Ban nhap sai dinh dang!");
-                }
-            }
-
-            System.out.format("Dia chi(%s):", staff.getAddress());
-            str = sc.nextLine();
-            if (!str.equals("")) {
-                staff.setAddress(str);
-            }
-
-            System.out.format("Luong(%s):", staff.getSalary());
-            str = sc.nextLine();
-            if (!str.equals("")) {
-                try {
-                    Double salary = Double.parseDouble(sc.nextLine());
-                    staff.setSalary(salary);
-                }
-                catch (NumberFormatException ex) {
-                    System.out.println("Ban nhap sai luong!");
-                }
-            }
+            modifyCommonInfo(sc, staff);
 
             if (staff instanceof Director) {
-                Director director = (Director)staff;
-                System.out.format("Ten dang nhap(%s):", director.getUser());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    director.setUser(str);
-                }
-
-                System.out.format("Mat khau(%s):", director.getPass());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    director.setPass(str);
-                }
-
-                System.out.format("Phu cap(%s):", director.getAllowance());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    try {
-                        double allowance = Double.parseDouble(str);
-                        director.setAllowance(allowance);
-                    }
-                    catch (NumberFormatException e) {
-                        System.out.println("Ban nhap sai phu cap!");
-                    }
-                }
-
+                modifyDirector(sc, (Director)staff);
             }
             else if (staff instanceof Manager) {
-                Manager manager = (Manager) staff;
-                System.out.format("Ten dang nhap(%s):", manager.getUser());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    manager.setUser(str);
-                }
-
-                System.out.format("Mat khau(%s):", manager.getPass());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    manager.setPass(str);
-                }
-
-                System.out.format("Phu cap(%s):", manager.getAllowance());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    try {
-                        double allowance = Double.parseDouble(str);
-                        manager.setAllowance(allowance);
-                    }
-                    catch (NumberFormatException e) {
-                        System.out.println("Ban nhap sai phu cap!");
-                    }
-                }
+                modifyManager(sc, (Manager)staff);
             }
             else if (staff instanceof Cashier) {
-                Cashier cashier = (Cashier) staff;
-                System.out.format("Ten dang nhap(%s):", cashier.getUser());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    cashier.setUser(str);
-                }
-
-                System.out.format("Mat khau(%s):", cashier.getPass());
-                str = sc.nextLine();
-                if (!sc.equals("")) {
-                    cashier.setPass(str);
-                }
+                modifyCashier(sc, (Cashier)staff);
             }
 
             System.out.println("Thong tin sau khi sua:");
@@ -329,6 +237,109 @@ public class StaffInOut {
         }
         else {
             System.out.println("Ma nhan vien khong ton tai");
+        }
+    }
+
+    private void modifyCommonInfo(Scanner sc, Staff staff) {
+        System.out.format("Ten(%s):", staff.getName());
+        String str = sc.nextLine();
+        if (!str.equals("")) {
+            staff.setName(str);
+        }
+
+        System.out.format("Ngay sinh(%s):", staff.getDateOfBirth());
+        str = sc.nextLine();
+        if (!str.equals("")) {
+            try {
+                staff.setDateOfBirth(LocalDate.parse(str));
+            }
+            catch (DateTimeParseException e) {
+                System.out.println("Ban nhap sai dinh dang!");
+            }
+        }
+
+        System.out.format("Dia chi(%s):", staff.getAddress());
+        str = sc.nextLine();
+        if (!str.equals("")) {
+            staff.setAddress(str);
+        }
+
+        System.out.format("Luong(%s):", staff.getSalary());
+        str = sc.nextLine();
+        if (!str.equals("")) {
+            try {
+                Double salary = Double.parseDouble(sc.nextLine());
+                staff.setSalary(salary);
+            }
+            catch (NumberFormatException ex) {
+                System.out.println("Ban nhap sai luong!");
+            }
+        }
+    }
+
+    private void modifyDirector(Scanner sc, Director director) {
+        System.out.format("Ten dang nhap(%s):", director.getUser());
+        String str = sc.nextLine();
+        if (!sc.equals("")) {
+            director.setUser(str);
+        }
+
+        System.out.format("Mat khau(%s):", director.getPass());
+        str = sc.nextLine();
+        if (!sc.equals("")) {
+            director.setPass(str);
+        }
+
+        System.out.format("Phu cap(%s):", director.getAllowance());
+        str = sc.nextLine();
+        if (!sc.equals("")) {
+            try {
+                double allowance = Double.parseDouble(str);
+                director.setAllowance(allowance);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Ban nhap sai phu cap!");
+            }
+        }
+    }
+
+    private void modifyManager(Scanner sc, Manager manager) {
+        System.out.format("Ten dang nhap(%s):", manager.getUser());
+        String str = sc.nextLine();
+        if (!sc.equals("")) {
+            manager.setUser(str);
+        }
+
+        System.out.format("Mat khau(%s):", manager.getPass());
+        str = sc.nextLine();
+        if (!sc.equals("")) {
+            manager.setPass(str);
+        }
+
+        System.out.format("Phu cap(%s):", manager.getAllowance());
+        str = sc.nextLine();
+        if (!sc.equals("")) {
+            try {
+                double allowance = Double.parseDouble(str);
+                manager.setAllowance(allowance);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Ban nhap sai phu cap!");
+            }
+        }
+    }
+
+    private void modifyCashier(Scanner sc, Cashier cashier) {
+        System.out.format("Ten dang nhap(%s):", cashier.getUser());
+        String str = sc.nextLine();
+        if (!sc.equals("")) {
+            cashier.setUser(str);
+        }
+
+        System.out.format("Mat khau(%s):", cashier.getPass());
+        str = sc.nextLine();
+        if (!sc.equals("")) {
+            cashier.setPass(str);
         }
     }
 

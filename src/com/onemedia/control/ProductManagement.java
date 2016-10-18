@@ -11,9 +11,11 @@ public class ProductManagement {
     public boolean addProduct(Product product) {
         if (product == null) return false;
         for (int i=0; i < products.size(); i++) {
-            product o = products.get(i);
-            if (product.getIdCode().equals(product.getIdCode()))
+            Product o = products.get(i);
+            if (o.getIdCode().equals(product.getIdCode()))
                 return false;
+        }
+        products.add(product);
         return true;
     }
 
@@ -25,9 +27,6 @@ public class ProductManagement {
                 return product;
             }
         }
-        /*
-        return sản phẩm bị xóa
-         */
         return null;
     }
 
@@ -36,6 +35,7 @@ public class ProductManagement {
             Product product = products.get(i);
             if (product.getIdCode().equals(idCode))
                 return true;
+        }
         return false;
     }
 
@@ -44,6 +44,7 @@ public class ProductManagement {
             Product product = products.get(i);
             if (product.getIdCode().equals(idCode))
                 return product;
+        }
         return null;
     }
 

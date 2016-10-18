@@ -6,17 +6,25 @@ public class Film extends Product {
 
     public Film() {
         super();
-        director = "";
-        actor = "";
-        genre = "";
+        director = "NO DIRECTOR";
+        actor = "NO ACTOR";
+        genre = "NO GENRE";
         issuedDate = null;
     }
     public Film(String idCode, String name) {
         super(idCode, name);
+        director = "NO DIRECTOR";
+        actor = "NO ACTOR";
+        genre = "NO GENRE";
+        issuedDate = null;
     }
 
     public Film(Product product) {
         super(product);
+        director = "NO DIRECTOR";
+        actor = "NO ACTOR";
+        genre = "NO GENRE";
+        issuedDate = null;
     }
     public Film(Film film) {
         super(film);
@@ -28,8 +36,10 @@ public class Film extends Product {
 
     @Override
     public void printInfo() {
-        System.out.format("Ma phim: %s, Ten phim: %s, Dao dien: %s, Nhan vat chinh: %s, The loai: %s, Ngay san xuat: %s\n",
-                getIdCode() , getName(), director, actor, genre, issuedDate);
+        super.printInfo();
+        System.out.format("Dao dien: %s, Nhan vat chinh: %s, The loai: %s," +
+                        " Ngay san xuat: %s\n",
+                director, actor, genre, issuedDate);
     }
 
     public void setDirector(String director) {

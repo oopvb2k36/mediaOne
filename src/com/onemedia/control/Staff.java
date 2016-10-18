@@ -23,6 +23,7 @@ public class Staff {
         setName(staff.getName());
         setAddress(staff.getAddress());
         setSalary(staff.getSalary());
+        setDateOfBirth(staff.getDateOfBirth());
     }
 
     public double getPaid() {

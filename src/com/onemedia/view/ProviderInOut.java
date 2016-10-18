@@ -100,15 +100,16 @@ public class ProviderInOut {
             provider.printInfo();
 
             System.out.format("Ten(%s):", provider.getName());
-            String name = sc.nextLine();
+            String str = sc.nextLine();
+            if (!str.equals("")) {
+                provider.setName(str);
+            }
+
 
             System.out.format("Dia chi(%s):", provider.getAddress());
-            String address = sc.nextLine();
-
-            System.out.print("Ban co sua khong?(yes/no)");
-            if (sc.nextLine().equals("yes")) {
-                if (!name.equals("")) provider.setName(name);
-                if (!address.equals("")) provider.setAddress(address);
+            str = sc.nextLine();
+            if (!str.equals("")) {
+                provider.setAddress(str);
             }
 
             System.out.println("Thong tin sau khi sua:");

@@ -85,8 +85,9 @@ public class StoreInOut {
                         o.run(sc);
                         break;
                     }
-                    case 4: { // TODO: bo sung ProductInOut
-                        System.out.println("Dang xay dung");
+                    case 4: {
+                        ProductInOut o = new ProductInOut(storeManagement);
+                        o.run(sc);
                         break;
                     }
                     case 5: {

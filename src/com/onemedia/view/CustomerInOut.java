@@ -107,27 +107,27 @@ public class CustomerInOut {
             System.out.println("Thong tin truoc khi sua:");
             customer.printInfo();
 
-            String str = "";
             System.out.format("Ten(%s):", customer.getName());
-            String name = sc.nextLine();
+            String str = sc.nextLine();
+            if (!str.equals("")) {
+                customer.setName(str);
+            }
 
             System.out.format("Dia chi(%s):", customer.getAddress());
-            String address = sc.nextLine();
+            str = sc.nextLine();
+            if (!str.equals("")) {
+                customer.setAddress(str);
+            }
 
             System.out.format("Chiet khau(%s):", customer.getDiscount());
-            double discount = -1;
             try {
-                discount = Double.parseDouble(sc.nextLine());
+                str = sc.nextLine();
+                if (!str.equals("")) {
+                    customer.setDiscount(Double.parseDouble(str));
+                }
             }
-            catch (NumberFormatException ex) {
+            catch (NumberFormatException e) {
                 System.out.println("Ban nhap sai chiet khau!");
-            }
-
-            System.out.print("Ban co sua khong?(yes/no)");
-            if (sc.nextLine().equals("yes")) {
-                if (!name.equals("")) customer.setName(name);
-                if (!address.equals("")) customer.setAddress(address);
-                if (discount >= 0) customer.setDiscount(discount);
             }
 
             System.out.println("Thong tin sau khi sua:");

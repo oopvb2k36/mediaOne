@@ -17,7 +17,7 @@ public class Store {
 
     public void printInfo() {
         System.out.format("Ten: %s, Dia chi: %s, Giam doc: %s, Dien thoai: %s," +
-                " Website: %s, MST: %s",
+                " Website: %s, MST: %s\n",
                 name, address, director, phone, website, taxCode);
     }
 

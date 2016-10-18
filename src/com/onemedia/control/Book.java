@@ -6,15 +6,28 @@ public class Book extends Product {
 
     public Book() {
         super();
+        author = "NO AUTHOR";
+        genre = "NO GENRE";
+        publisher = "NO PUBLISHER";
+        issuedDate = null;
     }
 
     public Book(String idCode, String name) {
         super(idCode, name);
+        author = "NO AUTHOR";
+        genre = "NO GENRE";
+        publisher = "NO PUBLISHER";
+        issuedDate = null;
     }
 
     public Book(Product product){
         super(product);
+        author = "NO AUTHOR";
+        genre = "NO GENRE";
+        publisher = "NO PUBLISHER";
+        issuedDate = null;
     }
+
     public Book(Book book) {
         super(book);
         setAuthor(book.getAuthor());
@@ -25,8 +38,9 @@ public class Book extends Product {
 
     @Override
     public void printInfo() {
-        System.out.format("Ma sach: %s, Ten sach: %s, Tac gia: %s, Nha xuat ban: %s, Ngay san xuat: %s\n",
-               getIdCode() , getName(), author, publisher, issuedDate);
+        super.printInfo();
+        System.out.format("Tac gia: %s, Nha xuat ban: %s, Ngay san xuat: %s\n",
+               author, publisher, issuedDate);
     }
 
     public void setAuthor(String author) {

@@ -28,23 +28,29 @@ public abstract class Product {
     }
 
     public double getSellPrice() {
-        if(quantity!=0){
-            quantity*sellUnitPrice;
-        }
-        else
-        return 0;
+        return quantity * sellUnitPrice;
     }
 
     public double getCostPrice() {
-        if(quantity!=0){
-            quantity*costUnitPrice;
-        }else
-        return 0;
+        return quantity * costUnitPrice;
     }
 
     public void printInfo() {
-        System.out.format("Ma SP: %s, Ten SP: %s, So luong: %s, Chiet khau: %s\n",
-                idCode, name, quantity, discount);
+        System.out.format("Ma SP: %s, Ten SP: %s, So luong: %s," +
+                        " Gia mua: %s, Gia ban: %s, Chiet khau: %s, ",
+                idCode, name, quantity, costUnitPrice, sellUnitPrice, discount);
+    }
+
+    public void printSellInfo() {
+        System.out.format("Ma SP: %s, Ten SP: %s, So luong: %s," +
+                        " Gia ban: %s, Chiet khau: %s\n",
+                idCode, name, quantity, sellUnitPrice, discount);
+    }
+
+    public void printCostInfo() {
+        System.out.format("Ma SP: %s, Ten SP: %s, So luong: %s," +
+                        " Gia mua: %s\n",
+                idCode, name, quantity, sellUnitPrice, discount);
     }
 
     public void setIdCode(String idCode) {

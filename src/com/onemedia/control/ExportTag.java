@@ -16,9 +16,10 @@ public class ExportTag {
     public double getMoneyTotal() {
         double sum = 0;
         for (Product o : products) {
-            sum += o.getSellPrice() *
-                    o.getDiscount() *
-                    customer.getDiscount();
+            double sellPrice = o.getSellPrice();
+            double disPro = o.getDiscount();
+            double disCust = customer.getDiscount();
+            sum += sellPrice - (sellPrice*disPro) - (sellPrice*disCust);
         }
         return sum;
     }
@@ -54,14 +55,7 @@ public class ExportTag {
                 );
         System.out.println("Danh sach san pham dinh kem:");
         for (Product o : products) {
-            System.out.format("Ma SP: %s, Ten: %s, " +
-                            "Don gia: %s, So luong: %s, Chiet khau: %s\n",
-                    o.getIdCode(),
-                    o.getName(),
-                    o.getSellUnitPrice(),
-                    o.getQuantity(),
-                    o.getDiscount()
-                    );
+            o.printSellInfo();
         }
         System.out.println("Tong tien: " + getMoneyTotal());
 

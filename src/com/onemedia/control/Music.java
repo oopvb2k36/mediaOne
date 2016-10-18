@@ -6,20 +6,23 @@ public class Music extends Product {
 
     public Music() {
         super();
-        artist = "";
-        genre = "";
+        artist = "NO ARTIST";
+        genre = "NO GENRE";
         issuedDate = null;
     }
 
     public Music(String idCode, String name) {
         super(idCode, name);
-        artist = "";
-        genre = "";
+        artist = "NO ARTIST";
+        genre = "NO GENRE";
         issuedDate = null;
     }
 
     public Music(Product product) {
         super(product);
+        artist = "NO ARTIST";
+        genre = "NO GENRE";
+        issuedDate = null;
     }
     public Music(Music music) {
         super(music);
@@ -30,8 +33,9 @@ public class Music extends Product {
 
     @Override
     public void printInfo() {
-        System.out.format("Ma bai hat: %s, Ten bai hat: %s, Nghe sy: %s, The loai: %s, Ngay phat hanh: %s\n",
-                getIdCode() , getName(), artist, genre, issuedDate);
+        super.printInfo();
+        System.out.format("Nghe sy: %s, The loai: %s, Ngay phat hanh: %s\n",
+                artist, genre, issuedDate);
     }
 
     public void setArtist(String artist) {

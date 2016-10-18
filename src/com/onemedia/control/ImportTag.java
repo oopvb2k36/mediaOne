@@ -52,13 +52,7 @@ public class ImportTag {
         );
         System.out.println("Danh sach san pham dinh kem:");
         for (Product o : products) {
-            System.out.format("Ma SP: %s, Ten: %s, " +
-                            "Don gia: %s, So luong: %s\n",
-                    o.getIdCode(),
-                    o.getName(),
-                    o.getCostUnitPrice(),
-                    o.getQuantity()
-            );
+            o.printCostInfo();
         }
         System.out.println("Tong tien: " + getMoneyTotal());
     }

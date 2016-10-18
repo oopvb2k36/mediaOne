@@ -93,7 +93,7 @@ public class ExportInOut {
         Product product = proProcess(sc);
         if (product == null) return;
 
-        product.printInfo();
+        product.printSellInfo();
 
         Product newProduct = null;
         if (product instanceof Book) {
